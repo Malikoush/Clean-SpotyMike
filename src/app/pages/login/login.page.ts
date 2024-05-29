@@ -19,7 +19,7 @@ import {
   IonButton,
   IonIcon, IonText, IonGrid, IonCol, IonRow } from '@ionic/angular/standalone';
 //import { AuthentificationService } from 'src/app/core/services/authentification.service';
-import { TranslateModule } from '@ngx-translate/core';
+//import { TranslateModule } from '@ngx-translate/core';
 //import { LoginRequestError } from 'src/app/core/interfaces/login';  
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
@@ -45,7 +45,7 @@ import { PasswordLostComponent } from 'src/app/shared/modal/password-lost/passwo
     IonContent,
     FormsModule,
     CommonModule,
-    TranslateModule,
+    //TranslateModule,
     ReactiveFormsModule,
   ],
   providers: [
@@ -81,7 +81,7 @@ export class LoginPage implements OnInit {
     
     
     if (this.form.valid) {
-      this.router.navigateByUrl('/home/tabs/tab1');
+      this.router.navigateByUrl('/home');
       this.submitForm = true;
       /*
       this.serviceAuth
