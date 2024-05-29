@@ -2,26 +2,14 @@ ion-content{
     --background: rgb(122,111,249);
     --background: linear-gradient(180deg, rgba(122,111,249,1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%);
 }
-
-ion-list {
-    background-color: transparent;
-  
-    ion-item {
-      ion-input {
-        background-color: transparent;
-      }
-    }
-  }
 .logo{
     padding-left: 15%;
     padding-right: 15%;
 }
-
 .form-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 10vh;
   }
   
   .form {
@@ -51,5 +39,3 @@ ion-list {
       background-color: #0d6655;
     }
   }
-
- 

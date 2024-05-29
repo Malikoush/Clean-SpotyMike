@@ -10,7 +10,7 @@
       <ion-col>
         <div class="form-container">
           
-<form class="form  " [formGroup]="form" (ngSubmit)="onSubmit()">
+<form class="form " [formGroup]="form" (ngSubmit)="onSubmit()">
   <div>
   <ion-list>
     <ion-item>
@@ -47,15 +47,30 @@
         <p class="error">Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character</p>
       </div>
     </div>
+    <ion-item>
+      <ion-input type="email" name="email" label="email" labelPlacement="floating" formControlName="email" placeholder="hi@ionic.io">
+        <div slot="label">Email </div>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="email" name="email" label="email" labelPlacement="floating" formControlName="email" placeholder="hi@ionic.io">
+        <div slot="label">Email </div>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="email" name="email" label="email" labelPlacement="floating" formControlName="email" placeholder="hi@ionic.io">
+        <div slot="label">Email </div>
+      </ion-input>
+    </ion-item>
     
   </ion-list>
 </div>
 <div class="righted">
-  <p (click)="onPasswordLostModal()"> Mot de passe oublié</p>
+ 
 </div>
 <div class="centered">
-  <button class="connexion-btn" type="submit" [disabled]="!form.valid">Connexion</button>
-  <p (click)="goToRegister()">Pas encore inscrit ?</p>
+  <button class="connexion-btn" type="submit" >S'inscrire</button>
+  <p (click)="goToConnexion()">Deja un compte ?</p>
 </div>
 </form>
 </div>
