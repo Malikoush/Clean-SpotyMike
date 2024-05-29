@@ -1,17 +1,15 @@
 <ion-tabs>
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="home" href="/tabs/tab1">
-      <ion-icon name="home-outline" aria-hidden="true"></ion-icon>
-    </ion-tab-button>
-
-    <ion-tab-button tab="favorite" href="/tabs/tab2">
-      <ion-icon aria-hidden="true" name="heart-outline"></ion-icon>
-    </ion-tab-button>
-    <ion-tab-button tab="playlist" href="/tabs/tab2">
-      <ion-icon aria-hidden="true" name="musical-notes-outline"></ion-icon>
-    </ion-tab-button>
-    <ion-tab-button tab="profil" href="/tabs/profil">
-      <ion-icon aria-hidden="true" name="person-outline"></ion-icon>
+    <ion-tab-button
+      *ngFor="let tab of tabs"
+      [tab]="tab.name"
+      [href]="'/' + tab.name"
+      (click)="activateTab(tab.name)"
+    >
+      <ion-icon
+        [name]="tab.isActive ? tab.iconSharp : tab.iconOutline"
+        aria-hidden="true"
+      ></ion-icon>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
