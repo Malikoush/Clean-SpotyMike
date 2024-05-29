@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { NgClass, NgFor } from '@angular/common';
 import { Component, EnvironmentInjector, OnInit, inject } from '@angular/core';
 import { RouterLinkActive } from '@angular/router';
 import {
@@ -33,6 +33,7 @@ import {
     IonLabel,
     RouterLinkActive,
     NgFor,
+    NgClass,
   ],
 })
 export class TabsPage implements OnInit {

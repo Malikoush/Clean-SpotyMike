@@ -1,13 +1,9 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>playlist</ion-title>
+    <ion-title>Music Playlist</ion-title>
+    <ion-buttons slot="end" class="text-2xl -mt-3 mr-3"> ... </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">playlist</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <app-card></app-card>
 </ion-content>
