@@ -17,10 +17,15 @@ import {
   IonItem,
   IonInput,
   IonButton,
-  IonIcon, IonText, IonGrid, IonCol, IonRow } from '@ionic/angular/standalone';
+  IonIcon,
+  IonText,
+  IonGrid,
+  IonCol,
+  IonRow,
+} from '@ionic/angular/standalone';
 //import { AuthentificationService } from 'src/app/core/services/authentification.service';
 //import { TranslateModule } from '@ngx-translate/core';
-//import { LoginRequestError } from 'src/app/core/interfaces/login';  
+//import { LoginRequestError } from 'src/app/core/interfaces/login';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { eye } from 'ionicons/icons';
@@ -33,7 +38,11 @@ import { PasswordLostComponent } from 'src/app/shared/modal/password-lost/passwo
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonRow, IonCol, IonGrid, IonText, 
+  imports: [
+    IonRow,
+    IonCol,
+    IonGrid,
+    IonText,
     IonIcon,
     IonItem,
     IonList,
@@ -48,9 +57,7 @@ import { PasswordLostComponent } from 'src/app/shared/modal/password-lost/passwo
     //TranslateModule,
     ReactiveFormsModule,
   ],
-  providers: [
-    ModalController 
-  ]
+  providers: [ModalController],
 })
 export class LoginPage implements OnInit {
   error = '';
@@ -71,15 +78,14 @@ export class LoginPage implements OnInit {
     ]),
   });
   constructor() {
-    addIcons({ eye});
+    addIcons({ eye });
   }
 
   ngOnInit() {}
 
   onSubmit() {
     this.error = '';
-    
-    
+
     if (this.form.valid) {
       this.router.navigateByUrl('/home');
       this.submitForm = true;
@@ -89,24 +95,20 @@ export class LoginPage implements OnInit {
         .subscribe((data: any | LoginRequestError) => {
           if (data.error) {
             this.error = data.message;*/
-          } else {
-            // Add LocalStorage User
-            this.router.navigateByUrl('/home');
-          }
-          //console.log(data);
-        };
-
-        goToRegister() {
-          this.router.navigateByUrl('/register');
-        }
-        async onPasswordLostModal() {
-          const modal = await this.modalCtl.create({
-            component: PasswordLostComponent,
-          });
-         await modal.present();
-        }
+    } else {
+      // Add LocalStorage User
+      this.router.navigateByUrl('/home');
     }
-  
+    //console.log(data);
+  }
 
- 
-  
+  goToRegister() {
+    this.router.navigateByUrl('/register');
+  }
+  async onPasswordLostModal() {
+    const modal = await this.modalCtl.create({
+      component: PasswordLostComponent,
+    });
+    await modal.present();
+  }
+}

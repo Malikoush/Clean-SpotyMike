@@ -1,8 +1,26 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonGrid, IonRow, IonCol, IonList, IonItem, IonIcon, IonButton } from '@ionic/angular/standalone';
+import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonList,
+  IonItem,
+  IonIcon,
+  IonButton,
+} from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +28,22 @@ import { Router } from '@angular/router';
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
   standalone: true,
-  imports: [IonButton, IonIcon, IonItem, IonList, IonCol, IonRow, IonGrid, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,ReactiveFormsModule]
+  imports: [
+    IonButton,
+    IonIcon,
+    IonItem,
+    IonList,
+    IonCol,
+    IonRow,
+    IonGrid,
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class RegisterPage implements OnInit {
   private router = inject(Router);
@@ -25,16 +58,12 @@ export class RegisterPage implements OnInit {
       Validators.minLength(8),
     ]),
   });
-  constructor() { }
+  constructor() {}
   onSubmit() {
-   
-      this.router.navigateByUrl('/home/tabs/tab1');
-
+    this.router.navigateByUrl('/home/tabs/tab1');
   }
-  ngOnInit() {
-  }
+  ngOnInit() {}
   goToConnexion() {
-    this.router.navigateByUrl('');
+    this.router.navigate(['/login']);
   }
-
 }
