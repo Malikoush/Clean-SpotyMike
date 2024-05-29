@@ -1,36 +1,47 @@
+import { PlaylistPage } from './../../pages/playlist/playlist.page';
+import { FavoritePage } from './../../pages/favorite/favorite.page';
 import { Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
 
 export const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'home',
         loadComponent: () =>
-          import('../../pages/tab1/tab1.page').then((m) => m.Tab1Page),
+          import('../../pages/home/home.page').then((m) => m.HomePage),
       },
       {
-        path: 'tab2',
+        path: 'favorite',
         loadComponent: () =>
-          import('../../pages/tab2/tab2.page').then((m) => m.Tab2Page),
+          import('../../pages/favorite/favorite.page').then(
+            (m) => m.FavoritePage
+          ),
       },
       {
-        path: 'tab3',
+        path: 'playlist',
         loadComponent: () =>
-          import('../../pages/tab3/tab3.page').then((m) => m.Tab3Page),
+          import('../../pages/playlist/playlist.page').then(
+            (m) => m.PlaylistPage
+          ),
+      },
+      {
+        path: 'profil',
+        loadComponent: () =>
+          import('../../pages/profil/profil.page').then((m) => m.ProfilPage),
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: 'home',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
 ];
