@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require("tailwindcss/defaultTheme");
+defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  content: ["./src/**/*.{html,ts}"],
+  content: ["./src/**/*.{html,ts,scss}", "./src/app/**/*.{html,ts,scss}"],
   theme: {
     extend: {
       fontFamily: {
@@ -17,5 +17,9 @@ module.exports = {
       ring,
     },
   },
-  plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],
+  plugins: [
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/typography"),
+    require("@tailwindcss/aspect-ratio"),
+  ],
 };
