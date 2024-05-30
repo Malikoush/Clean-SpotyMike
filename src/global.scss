@@ -24,10 +24,7 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
-@import "@ionic/angular/css/palettes/dark.system.css";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
 /**
  * Ionic Dark Mode
  * -----------------------------------------------------
@@ -69,6 +66,10 @@
   color: red;
   font-size: 14px;
 }
+@import "@ionic/angular/css/palettes/dark.system.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
   :root {

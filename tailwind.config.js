@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
-defaultTheme = require("tailwindcss/defaultTheme");
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  content: ["./src/**/*.{html,ts,scss}", "./src/app/**/*.{html,ts,scss}"],
+  content: ["./src/**/*.{html,ts}"],
   theme: {
     extend: {
       fontFamily: {
@@ -14,12 +14,7 @@ module.exports = {
         secondary: "var(--color-secondary)",
         footer: "#1B1E22",
       },
-      ring,
     },
   },
-  plugins: [
-    require("@tailwindcss/forms"),
-    require("@tailwindcss/typography"),
-    require("@tailwindcss/aspect-ratio"),
-  ],
+  plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],
 };
