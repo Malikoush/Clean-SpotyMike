@@ -7,18 +7,26 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/login/login.page').then((m) => m.LoginPage),
   },
+
+  {
+    path: 'register',
+    loadComponent: () =>
+      import('./pages/register/register.page').then((m) => m.RegisterPage),
+  },
+  {
+    path: 'play-music/:name',
+    loadComponent: () =>
+      import('./pages/play-music/play-music.page').then((m) => m.PlayMusicPage),
+  },
   {
     path: '',
     loadChildren: () =>
       import('./shared/tabs/tabs.routes').then((m) => m.routes),
   },
-  {
-    path: 'register',
-    loadComponent: () => import('./pages/register/register.page').then( m => m.RegisterPage)
-  },
+
   {
     path: '**',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/login',
     pathMatch: 'full',
   },
   {

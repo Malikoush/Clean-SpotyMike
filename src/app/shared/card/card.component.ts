@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   IonList,
   IonLabel,
@@ -15,9 +15,10 @@ import {
   IonIcon,
 } from '@ionic/angular/standalone';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
-import { NgFor } from '@angular/common';
+import { NgClass, NgFor } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { heartOutline, shareSocialOutline } from 'ionicons/icons';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-card',
@@ -41,10 +42,17 @@ import { heartOutline, shareSocialOutline } from 'ionicons/icons';
     IonLabel,
     IonLabel,
     NgFor,
+    RouterLink,
+    NgClass,
   ],
 })
 export class CardComponent implements OnInit {
   items: string[] = [];
+  isSelected = false;
+  isHidden = false;
+
+  private router = inject(Router);
+
   constructor() {
     addIcons({ heartOutline, shareSocialOutline });
   }
@@ -66,4 +74,11 @@ export class CardComponent implements OnInit {
   //     (ev as InfiniteScrollCustomEvent).target.complete();
   //   }, 500);
   // }
+  onSelect(name: string) {
+    this.isSelected = true;
+
+    this.isHidden = true;
+    this.router.navigate(['/play-music/' + name]);
+    // 2 secondes pour l'animation de disparition
+  }
 }
