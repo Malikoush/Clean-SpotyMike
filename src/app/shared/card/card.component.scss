@@ -4,3 +4,14 @@ ion-item {
 .rounded-image {
   border-radius: 50%;
 }
+.selected {
+  background-color: rgba(0, 0, 0, 0.1); /* Exemple de style de sélection */
+  transition: background-color 0.3s ease;
+}
+.fade-out {
+  opacity: 0;
+  transition: opacity 2s ease-out; /* La durée de la disparition est de 2 secondes */
+}
+.hidden {
+  display: none;
+}

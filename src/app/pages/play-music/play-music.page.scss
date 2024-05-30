@@ -1,0 +1,9 @@
+ion-content {
+  --background: rgb(83, 113, 105);
+  --background: linear-gradient(
+    185deg,
+    rgba(83, 113, 105, 1) 0%,
+    rgba(162, 178, 174, 1) 46%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}

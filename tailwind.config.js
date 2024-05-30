@@ -14,6 +14,7 @@ module.exports = {
         secondary: "var(--color-secondary)",
         footer: "#1B1E22",
       },
+      ring,
     },
   },
   plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],

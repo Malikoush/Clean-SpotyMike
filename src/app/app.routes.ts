@@ -14,10 +14,16 @@ export const routes: Routes = [
       import('./pages/register/register.page').then((m) => m.RegisterPage),
   },
   {
+    path: 'play-music/:name',
+    loadComponent: () =>
+      import('./pages/play-music/play-music.page').then((m) => m.PlayMusicPage),
+  },
+  {
     path: '',
     loadChildren: () =>
       import('./shared/tabs/tabs.routes').then((m) => m.routes),
   },
+
   {
     path: '**',
     redirectTo: '/login',
