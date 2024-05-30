@@ -1,5 +1,5 @@
 <div *ngFor="let item of items; let index = index">
-  <div class="flex py-2" (click)="onSelect('Music' + index)">
+  <div class="flex py-2" (click)="onSelect(name + index)">
     <div>
       <img
         src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
@@ -11,20 +11,37 @@
     </div>
 
     <div class="pl-3 flex-col">
-      <div class="font-bold">Music {{ index }}</div>
-      <div class="text-gray-500 text-sm">Randy Stanton</div>
-    </div>
+      <div class="font-bold w-full">{{ title }} {{ index }}</div>
 
-    <div class="flex ml-auto mt-14">
-      <div
-        class="w-6 h-6 border-2 border-gray-400 rounded-full flex items-center justify-center"
-      >
-        <ion-icon name="heart-outline" class="text-gray-800"></ion-icon>
+      <div class="text-gray-500 text-sm">Randy Stanton</div>
+      @if (title === "playlist") {
+      <div class="text-gray-500 text-sm">30 Songs</div>
+      }
+    </div>
+    <div class="flex-col ml-auto">
+      @if (title === "playlist") {
+      <div>
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
       </div>
-      <div
-        class="w-6 h-6 border-2 ml-2 border-gray-400 rounded-full flex items-center justify-center"
-      >
-        <ion-icon name="share-social-outline" class="text-gray-800"></ion-icon>
+      }
+
+      <div class="flex ml-auto mt-9">
+        @if(title === "music") {
+        <div
+          class="w-6 h-6 border-2 border-gray-400 rounded-full flex items-center justify-center"
+        >
+          <ion-icon name="heart-outline" class="text-gray-800"></ion-icon>
+        </div>
+        }
+
+        <div
+          class="w-6 h-6 border-2 border-gray-400 rounded-full flex items-center justify-center"
+        >
+          <ion-icon
+            name="share-social-outline"
+            class="text-gray-800"
+          ></ion-icon>
+        </div>
       </div>
     </div>
   </div>

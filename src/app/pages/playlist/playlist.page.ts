@@ -10,8 +10,11 @@ import {
   IonCard,
   IonCardContent,
   IonItem,
+  IonIcon,
 } from '@ionic/angular/standalone';
 import { CardComponent } from 'src/app/shared/card/card.component';
+import { addIcons } from 'ionicons';
+import { ellipsisHorizontalOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-playlist',
@@ -19,6 +22,7 @@ import { CardComponent } from 'src/app/shared/card/card.component';
   styleUrls: ['./playlist.page.scss'],
   standalone: true,
   imports: [
+    IonIcon,
     IonItem,
     IonCardContent,
     IonCard,
@@ -33,5 +37,9 @@ import { CardComponent } from 'src/app/shared/card/card.component';
   ],
 })
 export class PlaylistPage {
-  constructor() {}
+  constructor() {
+    addIcons({
+      ellipsisHorizontalOutline,
+    });
+  }
 }

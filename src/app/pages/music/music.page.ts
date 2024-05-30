@@ -1,4 +1,3 @@
-import { IonButtons, IonBackButton, IonIcon } from '@ionic/angular/standalone';
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -7,58 +6,46 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
+  IonButtons,
+  IonRouterOutlet,
+  IonIcon,
 } from '@ionic/angular/standalone';
+import { CardComponent } from 'src/app/shared/card/card.component';
 import { ActivatedRoute } from '@angular/router';
 import { addIcons } from 'ionicons';
-import {
-  ellipsisHorizontalOutline,
-  expandOutline,
-  heartOutline,
-  pauseOutline,
-  playSkipBackOutline,
-  playSkipForwardOutline,
-  repeatOutline,
-  shapesOutline,
-  shareSocialOutline,
-  shuffleOutline,
-} from 'ionicons/icons';
+import { Icon } from 'ionicons/dist/types/components/icon/icon';
+import { ellipsisHorizontalOutline } from 'ionicons/icons';
 
 @Component({
-  selector: 'app-play-music',
-  templateUrl: './play-music.page.html',
-  styleUrls: ['./play-music.page.scss'],
+  selector: 'app-music',
+  templateUrl: './music.page.html',
+  styleUrls: ['./music.page.scss'],
   standalone: true,
   imports: [
     IonIcon,
-    IonBackButton,
+    IonRouterOutlet,
+    IonButtons,
     IonContent,
     IonHeader,
     IonTitle,
     IonToolbar,
     CommonModule,
     FormsModule,
-    IonButtons,
+    CardComponent,
+    IonIcon,
   ],
 })
-export class PlayMusicPage implements OnInit {
+export class MusicPage implements OnInit {
   private activetedRoute = inject(ActivatedRoute);
   title = '';
+
   constructor() {
     addIcons({
-      heartOutline,
-      shareSocialOutline,
-      playSkipForwardOutline,
-      playSkipBackOutline,
-      pauseOutline,
-      repeatOutline,
-      shuffleOutline,
-      expandOutline,
       ellipsisHorizontalOutline,
     });
   }
 
   ngOnInit() {
     this.title = this.activetedRoute.snapshot.params['name'];
-    console.log(this.title);
   }
 }

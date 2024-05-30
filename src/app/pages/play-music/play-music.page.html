@@ -1,16 +1,14 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
+<ion-content class="ion-padding">
+  <div class="flex justify-between mt-2">
+    <ion-buttons class="text-white py-7">
       <ion-back-button defaultHref="/playlist"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{title}}</ion-title>
-    <ion-buttons slot="end" class="text-2xl -mt-3 mr-3">
-      ...<!-- Remplir avec des éléments de bouton supplémentaires si nécessaire -->
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content class="ion-padding">
+    <div class="text-white mt-8">{{title}}</div>
+    <ion-icon
+      name="ellipsis-horizontal-outline"
+      class="text-2xl mt-8 mr-3 text-white"
+    ></ion-icon>
+  </div>
   <div class="flex-col py-2">
     <div>
       <img

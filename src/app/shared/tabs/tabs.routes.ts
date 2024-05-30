@@ -28,6 +28,11 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'music/:name',
+        loadComponent: () =>
+          import('../../pages/music/music.page').then((m) => m.MusicPage),
+      },
+      {
         path: 'profil',
         loadComponent: () =>
           import('../../pages/profil/profil.page').then((m) => m.ProfilPage),
