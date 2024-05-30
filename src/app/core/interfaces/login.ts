@@ -1,3 +1,5 @@
+import { IToken, IUser } from "./user";
+
 export interface LoginRequestError {
     code?: number;
     error: boolean;
@@ -7,5 +9,6 @@ export interface LoginRequestError {
   export interface LoginRequestSucess {
     code?: number;
     error: boolean;
-    message: string;
+    user:IUser
+    token:IToken
   }
