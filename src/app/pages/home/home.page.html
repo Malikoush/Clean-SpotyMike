@@ -1,13 +1,103 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">home</ion-title>
-    </ion-toolbar>
+  <div class="container">
+  <ion-header collapse="condense" class="header">
+    <div class="circle"></div>
+    <ion-icon class="search" name="search-outline"></ion-icon>
+ 
   </ion-header>
+  <div class="new-album">
+    <div class="card">
+     
+        <ion-card-header>
+          <ion-card-subtitle>New Album</ion-card-subtitle>
+          <ion-card-title>R&B Hits</ion-card-title>
+          <ion-card-subtitle> Discover 87 songs!</ion-card-subtitle>
+          <ion-icon class="arrow-forward" name="arrow-forward-outline"></ion-icon>
+        </ion-card-header>
+      
+      
+      
+      <div class=" circleOne"></div>
+      <div class=" circleTwo"></div>
+      <div class="circleThree"></div>
+
+    </div>
+    <img class="img-album" src="{{songs[0].src}}">
+    
+  </div>
+  <div class="categorie">
+    <div class="header-cat">
+    <div>Music genres</div>
+    <div>See All</div>
+  </div>
+  <div class="choose-genre">
+    <ion-button 
+  shape="round" 
+  [class.fill]="selectedCategory === 'All'" 
+  [fill]="selectedCategory === 'All' ? 'solid' : 'outline'"
+  (click)="selectCategory('All')">All</ion-button>
+
+<ion-button 
+  shape="round" 
+  [class.fill]="selectedCategory === 'R&B'" 
+  [fill]="selectedCategory === 'R&B' ? 'solid' : 'outline'"
+  (click)="selectCategory('R&B')">R&B</ion-button>
+
+<ion-button 
+  shape="round" 
+  [class.fill]="selectedCategory === 'Pop'" 
+  [fill]="selectedCategory === 'Pop' ? 'solid' : 'outline'"
+  (click)="selectCategory('Pop')">Pop</ion-button>
+
+<ion-button 
+  shape="round" 
+  [class.fill]="selectedCategory === 'Rock'" 
+  [fill]="selectedCategory === 'Rock' ? 'solid' : 'outline'"
+  (click)="selectCategory('Rock')">Rock</ion-button>
+  </div>
+  </div>
+
+  <div class="categorie">
+  <div class="header-cat">
+    <div>Top Song</div>
+    <div>See All</div>
+  </div>
+ <app-carousel [songs]="songs"> </app-carousel>
+</div>
+<div class="categorie">
+  <div class="header-cat">
+    <div>Last Played</div>
+    <div>See All</div>
+  </div>
+  @for (song of songs; track song) {
+    @if($index<5){
+
+    
+    <app-tiny-card
+    [song]="song"
+    ></app-tiny-card>
+  }
+  }
+   
+ 
+</div>
+<div class="categorie">
+  <div class="header-cat">
+    <div>Top Artist</div>
+    <div>See All</div>
+  </div>
+ 
+    <app-carousel [songs]="songs"> </app-carousel>
+  
+</div>
+<div class="categorie">
+  <div class="header-cat">
+    <div>Top Album</div>
+    <div>See All</div>
+  </div>
+  <app-carousel [songs]="songs"> </app-carousel>
+</div>
+</div>
 </ion-content>
