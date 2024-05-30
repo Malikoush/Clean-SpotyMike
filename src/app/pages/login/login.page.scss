@@ -1,55 +1,56 @@
-ion-content{
-    --background: rgb(122,111,249);
-    --background: linear-gradient(180deg, rgba(122,111,249,1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%);
+ion-content {
+  --background: rgb(122, 111, 249);
+  --background: linear-gradient(
+    180deg,
+    rgba(122, 111, 249, 1) 0%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 255, 255, 1) 100%
+  );
 }
 
 ion-list {
-    background-color: transparent;
-  
-    ion-item {
-      ion-input {
-        background-color: transparent;
-      }
+  background-color: transparent;
+
+  ion-item {
+    ion-input {
+      background-color: transparent;
     }
   }
-.logo{
-    padding-left: 15%;
-    padding-right: 15%;
+}
+.logo {
+  padding-left: 15%;
+  padding-right: 15%;
 }
 
 .form-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 10vh;
-  }
-  
-  .form {
-    width: 100%;
-    max-width: 400px; /* Optional: Limit the max width of the form */
-    padding: 20px; /* Optional: Add padding to the form */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  }
+.form {
+  width: 100%;
+  max-width: 400px; /* Optional: Limit the max width of the form */
+  padding: 20px; /* Optional: Add padding to the form */
+}
 
 .connexion-btn {
-    background-color: #15AB90;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 4px;
-    
-    &:hover {
-      background-color: #11846f;
-    }
-  
-    &:active {
-      background-color: #0d6655;
-    }
+  background-color: #15ab90;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: #11846f;
   }
 
- 
+  &:active {
+    background-color: #0d6655;
+  }
+}

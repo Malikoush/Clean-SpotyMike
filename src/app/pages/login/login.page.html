@@ -1,65 +1,110 @@
 <ion-content [fullscreen]="true">
   <ion-grid>
     <ion-row class="pad-15">
-        <ion-col>
-      <img class="logo" src="..\assets\icon\spotymike.png" alt="">
-    </ion-col>
+      <ion-col>
+        <img class="logo" src="..\assets\icon\spotymike.png" alt="" />
+      </ion-col>
     </ion-row>
- 
-    <ion-row >
+
+    <ion-row>
       <ion-col>
         <div class="form-container">
-          
-<form class="form  " [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div>
-  <ion-list>
-    <ion-item>
-      <ion-input type="email" name="email" label="email" labelPlacement="floating" formControlName="email" placeholder="hi@ionic.io">
-        <div slot="label">Email </div>
-      </ion-input>
-    </ion-item>
-    <div *ngIf="form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)">
-      <div *ngIf="form.get('email')?.errors?.['required']">
-        <p class="error">Email is required</p>
-      </div>
-      <div *ngIf="form.get('email')?.errors?.['pattern']">
-        <p class="error">Email format is invalid</p>
-      </div>
-    </div>
-    <ion-item>
-      <ion-input type="password" name="password" label="password" formControlName="password" labelPlacement="stacked" placeholder="hi@ionic.io">
-        <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
-        <ion-button fill="clear" slot="end" aria-label="Show/hide">
-          <ion-icon slot="icon-only" name="eye" aria-hidden="true"></ion-icon>
-        </ion-button>
-      </ion-input>
-    </ion-item>
-  
-    
-    <div *ngIf="form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)">
-      <div *ngIf="form.get('password')?.errors?.['required']">
-        <p class="error">Password is required</p>
-      </div>
-      <div *ngIf="form.get('password')?.errors?.['minlength']">
-        <p class="error">Password must be at least 8 characters long</p>
-      </div>
-      <div *ngIf="form.get('password')?.errors?.['pattern']">
-        <p class="error">Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character</p>
-      </div>
-    </div>
-    
-  </ion-list>
-</div>
-<div class="righted">
-  <p (click)="onPasswordLostModal()"> Mot de passe oublié</p>
-</div>
-<div class="centered">
-  <button class="connexion-btn" type="submit" [disabled]="!form.valid">Connexion</button>
-  <p (click)="goToRegister()">Pas encore inscrit ?</p>
-</div>
-</form>
-</div>
-</ion-col>
-</ion-row>
-</ion-grid>
+          <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div>
+              <ion-list>
+                <div class="mb-4">
+                  <label
+                    class="block text-gray-400 text-sm font-bold mb-2"
+                    for="username"
+                  >
+                    Email <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    class="border-gray-400 focus:ring-green-700 focus:border-primary w-full py-2 px-3 h-14 text-gray-700 mb-3 leading-tight"
+                    id="email"
+                    formControlName="email"
+                    type="email"
+                    placeholder="mike@mike.mike"
+                  />
+                  <div *ngIf="form.get('email')?.errors ">
+                    <div *ngIf="form.get('email')?.errors?.['pattern']">
+                      <p class="error">Email format is invalid</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-6">
+                  <label
+                    class="block text-gray-400 text-sm font-bold mb-2"
+                    for="password"
+                  >
+                    Mot de passe <span class="text-red-500">*</span>
+                  </label>
+                  <!-- <input
+                    type="password"
+                    formControlName="password"
+                    class="border-gray-400 focus:ring-green-700 focus:border-primary w-full py-2 px-3 h-14 text-gray-700 mb-3 leading-tight"
+                    id="password"
+                    placeholder="******************"
+                  /> -->
+                  <div class="mt-1 relative">
+                    <input
+                      [type]="passwordFieldType==='password' ? 'password' : 'text'"
+                      formControlName="password"
+                      class="border-gray-400 focus:ring-green-700 focus:border-primary w-full py-2 px-3 h-14 text-gray-700 mb-3 leading-tight"
+                      id="password"
+                      placeholder="******************"
+                    />
+                    <button
+                      (click)="togglePasswordVisibility()"
+                      type="button"
+                      class="absolute -mt-3 text-lg inset-y-0 right-0 pr-3 flex items-center leading-5"
+                    >
+                      <ion-icon
+                        [name]="passwordFieldType === 'password' ? 'eye-outline' : 'eye-off-outline'"
+                        class="text-gray-500"
+                      ></ion-icon>
+                    </button>
+                  </div>
+
+                  <div
+                    *ngIf="form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)"
+                  >
+                    <div *ngIf="form.get('password')?.errors?.['minlength']">
+                      <p class="error">
+                        Password must be at least 8 characters long
+                      </p>
+                    </div>
+                    <div
+                      *ngIf="((form.get('password')?.errors?.['pattern'])&&!form.get('password')?.errors?.['minlength'])"
+                    >
+                      <p class="error">
+                        Password must contain at least one uppercase letter, one
+                        lowercase letter, one number, and one special character
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </ion-list>
+            </div>
+            <div class="righted text-primary">
+              <p (click)="onPasswordLostModal()">Mot de passe oublié?</p>
+            </div>
+            <div class="centered mt-4">
+              <button
+                class="connexion-btn"
+                type="submit"
+                [disabled]="!form.valid"
+              >
+                Connexion
+              </button>
+              <p (click)="goToRegister()" class="mt-4 text-primary">
+                Pas encore inscrit ?
+              </p>
+            </div>
+          </form>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { ModalController } from '@ionic/angular';
 import {
   FormControl,
@@ -17,13 +17,18 @@ import {
   IonItem,
   IonInput,
   IonButton,
-  IonIcon, IonText, IonGrid, IonCol, IonRow } from '@ionic/angular/standalone';
+  IonIcon,
+  IonText,
+  IonGrid,
+  IonCol,
+  IonRow,
+} from '@ionic/angular/standalone';
 //import { AuthentificationService } from 'src/app/core/services/authentification.service';
 //import { TranslateModule } from '@ngx-translate/core';
-//import { LoginRequestError } from 'src/app/core/interfaces/login';  
+//import { LoginRequestError } from 'src/app/core/interfaces/login';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { eye } from 'ionicons/icons';
+import { eye, eyeOffOutline, eyeOutline } from 'ionicons/icons';
 import { PasswordLostComponent } from 'src/app/shared/modal/password-lost/password-lost.component';
 //import { ModalController } from '@ionic/angular';
 //import { PasswordLostComponent } from 'src/app/shared/modal/password-lost/password-lost.component';
@@ -33,7 +38,11 @@ import { PasswordLostComponent } from 'src/app/shared/modal/password-lost/passwo
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonRow, IonCol, IonGrid, IonText, 
+  imports: [
+    IonRow,
+    IonCol,
+    IonGrid,
+    IonText,
     IonIcon,
     IonItem,
     IonList,
@@ -47,10 +56,9 @@ import { PasswordLostComponent } from 'src/app/shared/modal/password-lost/passwo
     CommonModule,
     //TranslateModule,
     ReactiveFormsModule,
+    NgClass,
   ],
-  providers: [
-    ModalController 
-  ]
+  providers: [ModalController],
 })
 export class LoginPage implements OnInit {
   error = '';
@@ -59,6 +67,7 @@ export class LoginPage implements OnInit {
   private router = inject(Router);
   private modalCtl = inject(ModalController);
   //private serviceAuth = inject(AuthentificationService);
+  passwordFieldType: string = 'password';
 
   form: FormGroup = new FormGroup({
     email: new FormControl('', [
@@ -68,45 +77,49 @@ export class LoginPage implements OnInit {
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(8),
+      Validators.pattern(
+        '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$'
+      ),
     ]),
   });
   constructor() {
-    addIcons({ eye});
+    addIcons({ eyeOutline, eyeOffOutline });
   }
 
   ngOnInit() {}
 
   onSubmit() {
+    console.log('ok');
+
     this.error = '';
-    
-    
+    this.submitForm = true;
+
     if (this.form.valid) {
       this.router.navigateByUrl('/home');
-      this.submitForm = true;
       /*
       this.serviceAuth
         .login(this.form.value.email, this.form.value.password)
         .subscribe((data: any | LoginRequestError) => {
           if (data.error) {
             this.error = data.message;*/
-          } else {
-            // Add LocalStorage User
-            this.router.navigateByUrl('/home');
-          }
-          //console.log(data);
-        };
-
-        goToRegister() {
-          this.router.navigateByUrl('/register');
-        }
-        async onPasswordLostModal() {
-          const modal = await this.modalCtl.create({
-            component: PasswordLostComponent,
-          });
-         await modal.present();
-        }
+    } else {
+      // Add LocalStorage User
+      this.router.navigateByUrl('/home');
     }
-  
+    //console.log(data);
+  }
 
- 
-  
+  goToRegister() {
+    this.router.navigateByUrl('/register');
+  }
+  async onPasswordLostModal() {
+    const modal = await this.modalCtl.create({
+      component: PasswordLostComponent,
+    });
+    await modal.present();
+  }
+  togglePasswordVisibility() {
+    this.passwordFieldType =
+      this.passwordFieldType === 'password' ? 'text' : 'password';
+  }
+}

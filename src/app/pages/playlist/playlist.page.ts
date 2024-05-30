@@ -32,8 +32,6 @@ import { CardComponent } from 'src/app/shared/card/card.component';
     CardComponent,
   ],
 })
-export class PlaylistPage implements OnInit {
+export class PlaylistPage {
   constructor() {}
-
-  ngOnInit() {}
 }
