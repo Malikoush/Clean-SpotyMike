@@ -27,8 +27,15 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    loadComponent: () => import('./pages/home/home.page').then( m => m.HomePage)
-  },
+    loadComponent: () => import('./pages/home/home.page').then( m => m.HomePage),
+    children: [
+      {
+        path: 'login',
+        loadComponent: () => import('./shared/carousel/carousel.component').then( m => m.CarouselComponent),
+       
+      }
+    ]
+    },
   {
     path: 'favorite',
     loadComponent: () => import('./pages/favorite/favorite.page').then( m => m.FavoritePage)

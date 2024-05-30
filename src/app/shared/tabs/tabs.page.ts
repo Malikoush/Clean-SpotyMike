@@ -19,6 +19,7 @@ import {
   personOutline,
   personSharp,
 } from 'ionicons/icons';
+import { FirestoreService } from 'src/app/core/services/firestore.service';
 
 @Component({
   selector: 'app-tabs',
@@ -38,6 +39,7 @@ import {
 })
 export class TabsPage implements OnInit {
   public environmentInjector = inject(EnvironmentInjector);
+  private albumService = inject(FirestoreService)
   tabs = [
     {
       name: 'home',
