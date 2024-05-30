@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import {
   IonList,
   IonLabel,
@@ -17,7 +17,11 @@ import {
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { NgClass, NgFor } from '@angular/common';
 import { addIcons } from 'ionicons';
-import { heartOutline, shareSocialOutline } from 'ionicons/icons';
+import {
+  ellipsisVerticalOutline,
+  heartOutline,
+  shareSocialOutline,
+} from 'ionicons/icons';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
@@ -47,6 +51,8 @@ import { Router, RouterLink } from '@angular/router';
   ],
 })
 export class CardComponent implements OnInit {
+  @Input() title?: string = '';
+  name: string = '';
   items: string[] = [];
   isSelected = false;
   isHidden = false;
@@ -54,12 +60,17 @@ export class CardComponent implements OnInit {
   private router = inject(Router);
 
   constructor() {
-    addIcons({ heartOutline, shareSocialOutline });
+    addIcons({ heartOutline, shareSocialOutline, ellipsisVerticalOutline });
   }
 
   ngOnInit() {
     this.generateItems();
-    console.log('items', this.items);
+
+    if (this.title === 'music') {
+      this.name = 'music';
+    } else {
+      this.name = 'playlist';
+    }
   }
 
   private generateItems() {
@@ -68,17 +79,15 @@ export class CardComponent implements OnInit {
       this.items.push(`Item ${count + i}`);
     }
   }
-  // onIonInfinite(ev: Event) {
-  //   this.generateItems();
-  //   setTimeout(() => {
-  //     (ev as InfiniteScrollCustomEvent).target.complete();
-  //   }, 500);
-  // }
-  onSelect(name: string) {
+
+  onSelect(url: string) {
     this.isSelected = true;
 
-    this.isHidden = true;
-    this.router.navigate(['/play-music/' + name]);
+    if (this.name === 'music') {
+      this.router.navigate(['/play-music/' + url]);
+    } else {
+      this.router.navigate(['/music/' + url]);
+    }
     // 2 secondes pour l'animation de disparition
   }
 }
