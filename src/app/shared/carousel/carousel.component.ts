@@ -7,14 +7,12 @@ import { Song } from '../../core/interfaces/song';
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
   standalone: true,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class CarouselComponent  implements OnInit {
-
-  constructor() { }
+export class CarouselComponent implements OnInit {
+  constructor() {}
 
   ngOnInit() {}
 
-  @Input() songs!:Song[];
-
+  @Input() songs: Song[] = [];
 }

@@ -1,138 +1,127 @@
-
-.container{
-    padding: 2vh;
-    position: relative;
-.header{
+.container {
+  padding: 2vh;
+  position: relative;
+  .header {
     display: flex;
     justify-content: space-between;
-    
-    .circle{
-        width: 50px;
-        height: 50px;
-        border-radius: 100%;
-        background-color: rgb(192, 167, 167);
+
+    .circle {
+      width: 50px;
+      height: 50px;
+      border-radius: 100%;
+      background-color: rgb(192, 167, 167);
     }
-    .search{
-        width: 4vh;
-        height: 4vh;
+    .search {
+      width: 4vh;
+      height: 4vh;
     }
-}
-.new-album{
+  }
+  .new-album {
     display: flex;
-    justify-content:end;
+    justify-content: end;
     align-items: center;
     height: 30vh;
-   .card{
-    display: flex;
-    justify-content: space-between;
-    background-color: #15AB90;
-    width:36vh;
-    height: 20vh;
-    transform: perspective(20px) rotateY(1deg);
-    overflow: hidden;
-    border-radius: 30px;
-    ion-card-header{
-    display: flex;
-    padding-top: 2vh;
-    padding-left: 0.5vh;
-    flex-direction: column;
-    z-index: 1000;
-    .arrow-forward{
-        width: 3vh;
-        height: 3vh;
-        color:white;
-        margin-top: 2vh;
-    }
-    ion-card-subtitle{
-        --color: white;
-    }
-    ion-card-title{
-        --color: white;
-        font-size: 1.5rem;
-        margin-bottom: 2vh;
-    }
-   }
-      
+    .card {
+      display: flex;
+      justify-content: space-between;
+      background-color: #15ab90;
+      width: 36vh;
+      height: 20vh;
+      transform: perspective(20px) rotateY(1deg);
+      overflow: hidden;
+      border-radius: 30px;
+      ion-card-header {
+        display: flex;
+        padding-top: 2vh;
+        padding-left: 0.5vh;
+        flex-direction: column;
+        z-index: 1000;
+        .arrow-forward {
+          width: 3vh;
+          height: 3vh;
+          color: white;
+          margin-top: 2vh;
+        }
+        ion-card-subtitle {
+          --color: white;
+        }
+        ion-card-title {
+          --color: white;
+          font-size: 1.5rem;
+          margin-bottom: 2vh;
+        }
+      }
+
       /* Define the shapes */
       .circleOne {
         position: absolute;
         animation: moveShapes 15s linear infinite;
-          width: 20vh;
-          height: 20vh;
-          background-color: #44d5bb;
-          border-radius: 50%;
-        
-          transform: translate(-50%, -50%);
-        }
-        .circleTwo {
-            position: absolute;
-            animation: moveShapes2 20s linear infinite;
-            width: 10vh;
-            height: 10vh;
-            background-color: #57e7cd;
-            border-radius: 50%;
-          
-            transform: translate(-50%, -50%);
-          }
-          .circleThree {
-            position: absolute;
-            animation: moveShapes3 10s linear infinite;
-            width: 10vh;
-            height: 10vh;
-            background-color: #73f0d9;
-            border-radius: 50%;
-          
-            transform: translate(-50%, -50%);
-          }
-      
-   }
-   .img-album{
-   position: absolute;
-   margin-right: 40px;
-    background-color: rgb(67, 34, 34);
-    width:17vh;
-    height: 22vh;
-}
-}
-.categorie{
+        width: 20vh;
+        height: 20vh;
+        background-color: #44d5bb;
+        border-radius: 50%;
+
+        transform: translate(-50%, -50%);
+      }
+      .circleTwo {
+        position: absolute;
+        animation: moveShapes2 20s linear infinite;
+        width: 10vh;
+        height: 10vh;
+        background-color: #57e7cd;
+        border-radius: 50%;
+
+        transform: translate(-50%, -50%);
+      }
+      .circleThree {
+        position: absolute;
+        animation: moveShapes3 10s linear infinite;
+        width: 10vh;
+        height: 10vh;
+        background-color: #73f0d9;
+        border-radius: 50%;
+
+        transform: translate(-50%, -50%);
+      }
+    }
+    .img-album {
+      position: absolute;
+      margin-right: 40px;
+      background-color: rgb(67, 34, 34);
+      width: 17vh;
+      height: 22vh;
+    }
+  }
+  .categorie {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding-top: 2vh;
-    .header-cat{
-        display: flex;
-        justify-content: space-between;  
-        padding-bottom: 2vh;
-        
-        
+    .header-cat {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 2vh;
     }
-    .choose-genre{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        
-        .fill{
-            --background: #15AB90;
-            color: rgb(255, 255, 255);
-        }
-        ion-button{
-            width: 20vw;
-            color: black;
-            --border-color: black;
-            --background-activated:#18bc9e;
-            
-            
-          
-           
-           
-           
-        }
+    .choose-genre {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .fill {
+        --background: #15ab90;
+        color: rgb(255, 255, 255);
+      }
+      ion-button {
+        width: 20vw;
+        color: black;
+        --border-color: black;
+        --background-activated: #18bc9e;
+      }
     }
-}
+  }
 
-
-/* Define the animation keyframes */
-@keyframes moveShapes {
+  /* Define the animation keyframes */
+  @keyframes moveShapes {
     0% {
       left: -10vh; /* Start off-screen to the left */
     }
@@ -140,11 +129,11 @@
       left: calc(100% - 5vh); /* Move to the right edge */
     }
     100% {
-        left: -15vh; /* Move off-screen to the left again */
+      left: -15vh; /* Move off-screen to the left again */
     }
   }
   /* Define the animation keyframes */
-@keyframes moveShapes2 {
+  @keyframes moveShapes2 {
     0% {
       left: 130%; /* Start off-screen to the right */
       top: 100%; /* Start off-screen at the bottom */
@@ -166,8 +155,8 @@
       transform: translate(-50%, 0) scale(1.2); /* Scale up slightly */
     }
     100% {
-        left: 100%; /* Start off-screen to the right */
-        top: 100%; /* Move off-screen at the top */
+      left: 100%; /* Start off-screen to the right */
+      top: 100%; /* Move off-screen at the top */
       transform: translate(50%, 50%) scale(1); /* Scale back to original */
     }
   }
@@ -197,5 +186,5 @@
       top: 150%; /* Move off-screen at the bottom */
       transform: translate(0, -100%) scale(1); /* Scale back to original */
     }
-}
+  }
 }

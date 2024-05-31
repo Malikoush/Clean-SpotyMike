@@ -1,21 +1,17 @@
-<swiper-container [slidesPerView]="3" [loop]="true" >
-@for (song of songs; track song) {
+<swiper-container [slidesPerView]="3" [loop]="true">
+  @for (song of songs; track song) {
   <swiper-slide>
     <div>
-    <div>
-      <img class="img-carou" src="{{song.src}}">
-      
-    </div>
-  
-    <ion-label>
-      <h2>{{song.title}}</h2>
-      <p>{{song.artist}}</p>
-    </ion-label>
-  </div>
-  
-  </swiper-slide>
-  
-}
- 
-</swiper-container>
+      <div>
+        <img class="img-carou" [src]="song.src" />
+      </div>
 
+      <ion-label>
+        <h2>{{ song.title }}</h2>
+        <p>{{ song.artist }}</p>
+      </ion-label>
+    </div>
+  </swiper-slide>
+
+  }
+</swiper-container>
