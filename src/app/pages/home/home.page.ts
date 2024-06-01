@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CarouselComponent } from 'src/app/shared/carousel/carousel.component';
@@ -22,6 +22,8 @@ import { ExploreContainerComponent } from 'src/app/explore-container/explore-con
 import { Song } from 'src/app/core/interfaces/song';
 import { arrowForwardOutline, searchOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { AuthentificationService } from 'src/app/core/services/authentification.service';
+import { IUser } from 'src/app/core/interfaces/user';
 
 @Component({
   selector: 'app-home',
@@ -50,6 +52,8 @@ import { addIcons } from 'ionicons';
   ],
 })
 export class HomePage implements OnInit {
+  private auth = inject(AuthentificationService);
+
   constructor() {
     addIcons({ searchOutline, arrowForwardOutline });
   }

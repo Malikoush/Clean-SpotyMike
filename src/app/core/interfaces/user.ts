@@ -1,22 +1,18 @@
-type ERoleUser = 'user'|'artist';
+type ERoleUser = 'user' | 'artist';
 
 export interface IUser {
+  isEmailVerified: boolean;
+  role: ERoleUser;
+  email: string;
+  name: string;
+  id: string;
+}
 
-    isEmailVerified: boolean;
-    role: ERoleUser;
-    email: string;
-    name: string;
-    id: string;
-  }
-
-  export interface IAcessToken {
-
-    token: string;
-    expire: string|Date;
-  }
-  export interface IToken {
-
-
-    acess: IAcessToken;
-    refresh: IAcessToken;
-  }
+export interface IAcessToken {
+  token: string;
+  expire: string | Date;
+}
+export interface IToken {
+  acess: IAcessToken;
+  refresh: IAcessToken;
+}
