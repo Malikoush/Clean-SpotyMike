@@ -8,7 +8,9 @@
           class="w-8 h-8"
         />
       </ion-avatar>
-      <ion-icon class="search text-2xl" name="search-outline"></ion-icon>
+      <a [href]="['/search']">
+        <ion-icon class="search text-2xl" name="search-outline"></ion-icon
+      ></a>
     </div>
     <div class="new-album min-[375px]:mr-3">
       <div class="card">
@@ -39,6 +41,7 @@
           [class.fill]="selectedCategory === 'All'"
           [fill]="selectedCategory === 'All' ? 'solid' : 'outline'"
           (click)="selectCategory('All')"
+          [href]="['/categorie']"
           >All</ion-button
         >
 
@@ -47,6 +50,7 @@
           [class.fill]="selectedCategory === 'R&B'"
           [fill]="selectedCategory === 'R&B' ? 'solid' : 'outline'"
           (click)="selectCategory('R&B')"
+          [href]="['/categorie']"
           >R&B</ion-button
         >
 
@@ -55,6 +59,7 @@
           [class.fill]="selectedCategory === 'Pop'"
           [fill]="selectedCategory === 'Pop' ? 'solid' : 'outline'"
           (click)="selectCategory('Pop')"
+          [href]="['/categorie']"
           >Pop</ion-button
         >
 
@@ -63,6 +68,7 @@
           [class.fill]="selectedCategory === 'Rock'"
           [fill]="selectedCategory === 'Rock' ? 'solid' : 'outline'"
           (click)="selectCategory('Rock')"
+          [href]="['/categorie']"
           >Rock</ion-button
         >
       </div>
@@ -102,8 +108,12 @@
       </div>
 
       <swiper-container [slidesPerView]="2" [loop]="true" [autoplay]="true">
-        @for (song of songs; track song) {
-        <app-carousel [title]="song.title" [img]="song.cover" class="px-1">
+        @for (artist of artists; track artist) {
+        <app-carousel
+          [title]="artist.fullname"
+          [img]="artist.avatar"
+          class="px-1"
+        >
         </app-carousel>
 
         }

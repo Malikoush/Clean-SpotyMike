@@ -28,7 +28,7 @@ import { Song } from 'src/app/core/interfaces/song';
 import { arrowForwardOutline, searchOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { AuthentificationService } from 'src/app/core/services/authentification.service';
-import { ISong, IUser } from 'src/app/core/interfaces/user';
+import { IArtist, ISong, IUser } from 'src/app/core/interfaces/user';
 import { FirestoreService } from 'src/app/core/services/firestore.service';
 
 @Component({
@@ -62,7 +62,7 @@ export class HomePage implements OnInit {
   private auth = inject(AuthentificationService);
   private firebase = inject(FirestoreService);
   songs: ISong[] = [];
-
+  artists: IArtist[] = [];
   users: IUser[] = [];
   constructor() {
     addIcons({ searchOutline, arrowForwardOutline });
@@ -71,7 +71,10 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.firebase.getDocumentsFromGroupCollection().subscribe((res) => {
       this.songs = res;
-      console.log(this.songs);
+    });
+
+    this.firebase.getArtists().subscribe((res) => {
+      this.artists = res;
     });
   }
 

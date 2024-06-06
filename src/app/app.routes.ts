@@ -25,25 +25,18 @@ export const routes: Routes = [
   },
 
   {
+    path: 'search',
+    loadComponent: () =>
+      import('./pages/search/search.page').then((m) => m.SearchPage),
+  },
+  {
+    path: 'categorie',
+    loadComponent: () =>
+      import('./pages/categorie/categorie.page').then((m) => m.CategoriePage),
+  },
+  {
     path: '**',
     redirectTo: '/login',
     pathMatch: 'full',
-  },
-  {
-    path: 'profil',
-    loadComponent: () => import('./pages/profil/profil.page').then( m => m.ProfilPage)
-  },
-  {
-    path: 'home',
-    loadComponent: () => import('./pages/home/home.page').then( m => m.HomePage),
-    
-    },
-  {
-    path: 'favorite',
-    loadComponent: () => import('./pages/favorite/favorite.page').then( m => m.FavoritePage)
-  },
-  {
-    path: 'playlist',
-    loadComponent: () => import('./pages/playlist/playlist.page').then( m => m.PlaylistPage)
   },
 ];

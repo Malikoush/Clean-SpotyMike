@@ -47,6 +47,9 @@ export class MusicPage implements OnInit {
   private firebase = inject(FirestoreService);
   songs: ISong[] = [];
   artist: IArtist[] = [];
+  playlist: IPlaylist[] = [];
+
+  ok: string[] = [];
   constructor() {
     addIcons({
       ellipsisHorizontalOutline,
@@ -58,10 +61,27 @@ export class MusicPage implements OnInit {
     this.title = this.activetedRoute.snapshot.params['name'];
     console.log(this.title);
 
-    this.firebase.getUserArtist(this.userIdDocument).subscribe((res) => {
-      this.artist = res;
-      console.log(this.artist);
-    });
+    // this.firebase
+    //   .getUserPlaylistsById(this.userIdDocument, this.title)
+    //   .subscribe((res) => {
+    //     this.playlist = res;
+    //     this.playlist.map((playlist) => {
+    //       this.ok = playlist.song;
+
+    //       this.ok.map((song) => {
+
+    //       });
+    //     });
+    //   });
+    // this.firebase.getSongsByIds('1').subscribe((res) => {
+    //   this.songs = res;
+    //   console.log(this.songs);
+    // });
+
+    // this.firebase.getUserArtist(this.userIdDocument).subscribe((res) => {
+    //   this.artist = res;
+    //   console.log(this.artist);
+    // });
 
     // this.firebase
     //   .getUserPlaylistsById(this.userIdDocument, this.title)
@@ -72,9 +92,9 @@ export class MusicPage implements OnInit {
     //     });
     //   });
 
-    // this.firebase.getDocumentsFromGroupCollection().subscribe((res) => {
-    //   this.song = res;
-    //   console.log(this.song);
-    // });
+    this.firebase.getDocumentsFromGroupCollection().subscribe((res) => {
+      this.songs = res;
+      console.log(this.songs);
+    });
   }
 }

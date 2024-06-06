@@ -65,45 +65,59 @@ export class FirestoreService {
     );
   }
 
-  // getUserPlaylistsById(
-  //   idDocumentUser: string,
-  //   title: string
-  // ): Observable<IPlaylist[]> {
-  //   const playlistsCol = collection(
-  //     this.db,
-  //     `users/${idDocumentUser}/playlist`
-  //   );
-  //   const q = query(playlistsCol, where('_id', '==', title));
-  //   const playlistsSnapshot = from(getDocs(q));
-  //   return playlistsSnapshot.pipe(
-  //     map(
-  //       (snapshot) =>
-  //         snapshot.docs.map((doc) => ({
-  //           idDocument: doc.id,
-  //           ...doc.data(),
-  //         })) as IPlaylist[]
-  //     )
-  //   );
-  // }
-  getPlaylistByUserIdAndPlaylistId(
-    userId: string,
-    playlistId: string
-  ): Observable<IPlaylist> {
-    const playlistDoc = doc(this.db, `users/${userId}/playlist/${playlistId}`);
-    const playlistSnapshot = from(getDoc(playlistDoc));
-    return playlistSnapshot.pipe(
-      map((snapshot) => {
-        if (snapshot.exists()) {
-          return {
-            idDocument: snapshot.id,
-            ...snapshot.data(),
-          } as IPlaylist;
-        } else {
-          throw new Error('Playlist not found');
-        }
-      })
+  getArtists(): Observable<IArtist[]> {
+    const groupCollection = collectionGroup(this.db, 'artist');
+    const querySnapshot = from(getDocs(groupCollection));
+    return querySnapshot.pipe(
+      map(
+        (snapshot) =>
+          snapshot.docs.map((doc) => ({
+            idDocument: doc.id,
+            ...doc.data(),
+          })) as IArtist[]
+      )
     );
   }
+
+  getUserPlaylistsById(
+    idDocumentUser: string,
+    title: string
+  ): Observable<IPlaylist[]> {
+    const playlistsCol = collection(
+      this.db,
+      `users/${idDocumentUser}/playlist`
+    );
+    const q = query(playlistsCol, where('title', '==', title));
+    const playlistsSnapshot = from(getDocs(q));
+    return playlistsSnapshot.pipe(
+      map(
+        (snapshot) =>
+          snapshot.docs.map((doc) => ({
+            idDocument: doc.id,
+            ...doc.data(),
+          })) as IPlaylist[]
+      )
+    );
+  }
+  // getPlaylistByUserIdAndPlaylistId(
+  //   userId: string,
+  //   playlistId: string
+  // ): Observable<IPlaylist> {
+  //   const playlistDoc = doc(this.db, `users/${userId}/playlist/${playlistId}`);
+  //   const playlistSnapshot = from(getDoc(playlistDoc));
+  //   return playlistSnapshot.pipe(
+  //     map((snapshot) => {
+  //       if (snapshot.exists()) {
+  //         return {
+  //           idDocument: snapshot.id,
+  //           ...snapshot.data(),
+  //         } as IPlaylist;
+  //       } else {
+  //         throw new Error('Playlist not found');
+  //       }
+  //     })
+  //   );
+  // }
 
   getDocumentsFromGroupCollection(): Observable<ISong[]> {
     const groupCollection = collectionGroup(this.db, 'song');
@@ -118,35 +132,22 @@ export class FirestoreService {
       )
     );
   }
-  // getSongsByIds(songIds: string[]): Observable<ISong[]> {
-  //   const groupCollection = collectionGroup(this.db, 'song');
-  //   const q = query(groupCollection, where('idDocument', 'in', songIds));
-  //   const querySnapshot = from(getDocs(q));
-  //   console.log(
-  //     querySnapshot.pipe(
-  //       map((snapshot) =>
-  //         snapshot.docs.map(
-  //           (doc) =>
-  //             ({
-  //               idDocument: doc.id,
-  //               ...doc.data(),
-  //             } as ISong)
-  //         )
-  //       )
-  //     )
-  //   );
-  //   return querySnapshot.pipe(
-  //     map((snapshot) =>
-  //       snapshot.docs.map(
-  //         (doc) =>
-  //           ({
-  //             idDocument: doc.id,
-  //             ...doc.data(),
-  //           } as ISong)
-  //       )
-  //     )
-  //   );
-  // }
+  getSongsByIds(songIds: string): Observable<ISong[]> {
+    const groupCollection = collectionGroup(this.db, 'song');
+    const q = query(groupCollection, where('title', '==', 'song1'));
+    const querySnapshot = from(getDocs(q));
+    return querySnapshot.pipe(
+      map((snapshot) =>
+        snapshot.docs.map(
+          (doc) =>
+            ({
+              idDocument: doc.id,
+              ...doc.data(),
+            } as ISong)
+        )
+      )
+    );
+  }
 
   // getSongsById(idSong: string): Observable<ISong[]> {
   //   const groupCollection = collectionGroup(this.db, 'song');
