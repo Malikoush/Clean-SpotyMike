@@ -1,3 +1,4 @@
+import { LocalstorageService } from './../../core/services/localstorage.service';
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
 import { ModalController } from '@ionic/angular';
@@ -30,6 +31,9 @@ import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { eye, eyeOffOutline, eyeOutline } from 'ionicons/icons';
 import { PasswordLostComponent } from 'src/app/shared/modal/password-lost/password-lost.component';
+import { AuthentificationService } from 'src/app/core/services/authentification.service';
+import { IUser } from 'src/app/core/interfaces/user';
+import { FirestoreService } from 'src/app/core/services/firestore.service';
 //import { ModalController } from '@ionic/angular';
 //import { PasswordLostComponent } from 'src/app/shared/modal/password-lost/password-lost.component';
 
@@ -63,10 +67,11 @@ import { PasswordLostComponent } from 'src/app/shared/modal/password-lost/passwo
 export class LoginPage implements OnInit {
   error = '';
   submitForm = false;
-
+  userIdDocument: string = '';
   private router = inject(Router);
   private modalCtl = inject(ModalController);
-  //private serviceAuth = inject(AuthentificationService);
+  private localStorageService = inject(LocalstorageService);
+  private firebase = inject(FirestoreService);
   passwordFieldType: string = 'password';
 
   form: FormGroup = new FormGroup({
@@ -86,27 +91,33 @@ export class LoginPage implements OnInit {
     addIcons({ eyeOutline, eyeOffOutline });
   }
 
-  ngOnInit() {}
-
+  ngOnInit(): void {
+    // this.userIdDocument = this.localStorageService.getElement('userIdDocument');
+    // if (this.userIdDocument) {
+    //   this.localStorageService.removeElement('userIdDocument');
+    // }
+  }
   onSubmit() {
-    console.log('ok');
-
     this.error = '';
     this.submitForm = true;
 
     if (this.form.valid) {
-      this.router.navigateByUrl('/home');
-      /*
-      this.serviceAuth
+      // this.router.navigateByUrl('/home');
+      this.firebase
         .login(this.form.value.email, this.form.value.password)
-        .subscribe((data: any | LoginRequestError) => {
-          if (data.error) {
-            this.error = data.message;*/
-    } else {
-      // Add LocalStorage User
-      this.router.navigateByUrl('/home');
+        .subscribe((user) => {
+          if (user.idDocument) {
+            this.localStorageService.setElement(
+              'userIdDocument',
+              JSON.stringify(user.idDocument)
+            ); // JSON.stringify( user);
+            this.router.navigateByUrl('/home');
+          } else {
+            this.error = 'Email ou mot de passe incorrect';
+            console.log(this.error);
+          }
+        });
     }
-    //console.log(data);
   }
 
   goToRegister() {

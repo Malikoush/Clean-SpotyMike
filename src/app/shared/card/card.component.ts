@@ -23,6 +23,7 @@ import {
   shareSocialOutline,
 } from 'ionicons/icons';
 import { Router, RouterLink } from '@angular/router';
+import { IPlaylist, ISong } from 'src/app/core/interfaces/user';
 
 @Component({
   selector: 'app-card',
@@ -51,9 +52,12 @@ import { Router, RouterLink } from '@angular/router';
   ],
 })
 export class CardComponent implements OnInit {
+  @Input() styles?: string = '';
   @Input() title?: string = '';
+  @Input() nameArtist?: string = '';
+  @Input() nbre?: number;
+  @Input() idDocument?: string = '';
   name: string = '';
-  items: string[] = [];
   isSelected = false;
   isHidden = false;
 
@@ -64,23 +68,16 @@ export class CardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.generateItems();
+    console.log(this.idDocument);
 
-    if (this.title === 'music') {
+    if (this.styles === 'music') {
       this.name = 'music';
     } else {
       this.name = 'playlist';
     }
   }
 
-  private generateItems() {
-    const count = this.items.length + 1;
-    for (let i = 0; i < 20; i++) {
-      this.items.push(`Item ${count + i}`);
-    }
-  }
-
-  onSelect(url: string) {
+  onSelect(url?: string) {
     this.isSelected = true;
 
     if (this.name === 'music') {

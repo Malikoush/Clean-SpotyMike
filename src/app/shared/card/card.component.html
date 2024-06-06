@@ -1,39 +1,25 @@
-<div *ngFor="let item of items; let index = index">
-  <div class="flex py-2" (click)="onSelect(name + index)">
+<div>
+  <div class="flex py-2" (click)="onSelect(idDocument)">
     <div>
       <img
-        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+        src="https://funbestfun.com/wp-content/uploads/2022/02/playlist.jpg"
         alt="The Wisconsin State Capitol building in Madison, WI at night"
-        width="70"
-        height="70"
+        width="100"
+        height="100"
         class="rounded-lg"
       />
     </div>
 
     <div class="pl-3 flex-col">
-      <div class="font-bold w-full">{{ title }} {{ index }}</div>
-
-      <div class="text-gray-500 text-sm">Randy Stanton</div>
-      @if (title === "playlist") {
-      <div class="text-gray-500 text-sm">30 Songs</div>
-      }
+      <div class="font-bold w-full">{{ title }}</div>
+      <div class="text-gray-500 text-sm">{{ nbre }} Songs</div>
     </div>
     <div class="flex-col ml-auto">
-      @if (title === "playlist") {
       <div>
         <ion-icon name="ellipsis-vertical-outline"></ion-icon>
       </div>
-      }
 
       <div class="flex ml-auto mt-9">
-        @if(title === "music") {
-        <div
-          class="w-6 h-6 border-2 border-gray-400 rounded-full flex items-center justify-center"
-        >
-          <ion-icon name="heart-outline" class="text-gray-800"></ion-icon>
-        </div>
-        }
-
         <div
           class="w-6 h-6 border-2 border-gray-400 rounded-full flex items-center justify-center"
         >
@@ -45,8 +31,6 @@
       </div>
     </div>
   </div>
+
   <hr />
 </div>
-<!-- <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
-  <ion-infinite-scroll-content></ion-infinite-scroll-content>
-</ion-infinite-scroll> -->

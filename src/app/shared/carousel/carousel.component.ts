@@ -10,6 +10,8 @@ import { Song } from '../../core/interfaces/song';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CarouselComponent implements OnInit {
+  @Input() title?: string = '';
+  @Input() img?: string = '';
   constructor() {}
 
   ngOnInit() {}

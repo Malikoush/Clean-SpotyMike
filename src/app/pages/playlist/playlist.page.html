@@ -6,5 +6,14 @@
       class="text-2xl mr-3"
     ></ion-icon>
   </div>
-  <app-card title="playlist" class="p-3"></app-card>
+  @for (playlist of playlists; track $index){
+  <app-card
+    styles="playlist"
+    [title]="playlist.title"
+    [nbre]="playlist.song.length"
+    [idDocument]="playlist.idDocument"
+    class="p-3"
+  ></app-card>
+
+  }
 </ion-content>
