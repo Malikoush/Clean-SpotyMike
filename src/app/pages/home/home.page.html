@@ -1,13 +1,15 @@
 <ion-content [fullscreen]="true">
   <div class="container">
-    <ion-header collapse="condense" class="header">
-      <ion-avatar (click)="redirectTo('/profil')">
+    <div class="flex justify-between mt-6">
+      <ion-avatar>
         <img
-        src="{{songs[1].cover}}" class="account"
+          alt="Silhouette of a person's head"
+          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpublic-files.gumroad.com%2Fn6cx6u4llal243c43fmew42xh4yu&f=1&nofb=1&ipt=1a49ab24b32d1a401397810e13ea7a8b40e5105de61e9105fa3722b1b14a7292&ipo=images"
+          class="w-8 h-8"
         />
       </ion-avatar>
       <ion-icon class="search text-2xl" name="search-outline"></ion-icon>
-    </ion-header>
+    </div>
     <div class="new-album min-[375px]:mr-3">
       <div class="card">
         <ion-card-header>
@@ -29,7 +31,9 @@
     <div class="categorie">
       <div class="header-cat">
         <div class="font-bold">Music Genres</div>
-        <div class="text-primary" (click)="redirectTo('/categorie')">See All</div>
+        <div class="text-primary" (click)="redirectTo('/categorie')">
+          See All
+        </div>
       </div>
       <div class="choose-genre">
         <ion-button
@@ -75,54 +79,45 @@
         <div class="font-bold">Top Song</div>
         <div class="text-primary" (click)="redirectTo('/topsong')">See All</div>
       </div>
-     
 
-        <app-carousel [songs]="songs" >
-        </app-carousel>
-
-    
+      <app-carousel [songs]="songs"> </app-carousel>
     </div>
     <div class="categorie">
       <div class="header-cat">
         <div class="font-bold">Last Played</div>
-        <div class="text-primary" (click)="redirectTo('/historique')">See All</div>
+        <div class="text-primary" (click)="redirectTo('/historique')">
+          See All
+        </div>
       </div>
       @for (song of songs; track song) {
 
       <app-tiny-card
         [title]="song.title"
         [img]="song.cover"
-        [duration]="song.duration"  (click)="redirectTo('/play-music/music0')"
+        [duration]="song.duration"
+        (click)="redirectTo('/play-music/music0')"
       ></app-tiny-card>
       }
     </div>
     <div class="categorie">
       <div class="header-cat">
         <div class="font-bold">Top Artist</div>
-        <div class="text-primary" (click)="redirectTo('/topartist')">See All</div>
+        <div class="text-primary" (click)="redirectTo('/topartist')">
+          See All
+        </div>
       </div>
 
-     
-       
-        <app-carousel
-          [songs]="songs"
-        >
-        </app-carousel>
-
-      
-   
+      <app-carousel [songs]="songs"> </app-carousel>
     </div>
     <div class="categorie">
       <div class="header-cat">
         <div class="font-bold">Top Album</div>
-       <div class="text-primary" (click)="redirectTo('/topalbum')">See All</div>
+        <div class="text-primary" (click)="redirectTo('/topalbum')">
+          See All
+        </div>
       </div>
 
-     
-        <app-carousel [songs]="songs" >
-        </app-carousel>
-
-       
+      <app-carousel [songs]="songs"> </app-carousel>
     </div>
   </div>
 </ion-content>
