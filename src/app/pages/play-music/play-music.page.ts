@@ -22,6 +22,8 @@ import {
   shareSocialOutline,
   shuffleOutline,
 } from 'ionicons/icons';
+import { FirestoreService } from 'src/app/core/services/firestore.service';
+import { ISong } from 'src/app/core/interfaces/user';
 
 @Component({
   selector: 'app-play-music',
@@ -42,7 +44,9 @@ import {
 })
 export class PlayMusicPage implements OnInit {
   private activetedRoute = inject(ActivatedRoute);
-  title = '';
+  private firebase = inject(FirestoreService);
+  songs: ISong[] = [];
+  id: string = '';
   constructor() {
     addIcons({
       heartOutline,
@@ -58,7 +62,10 @@ export class PlayMusicPage implements OnInit {
   }
 
   ngOnInit() {
-    this.title = this.activetedRoute.snapshot.params['name'];
-    console.log(this.title);
+    this.id = this.activetedRoute.snapshot.params['name'];
+
+    this.firebase.getOneSongsByIds(this.id).subscribe((data) => {
+      this.songs = data;
+    });
   }
 }
