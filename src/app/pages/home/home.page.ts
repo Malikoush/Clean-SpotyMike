@@ -1,8 +1,7 @@
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
-  OnInit,
-  inject,
+  OnInit, inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -21,22 +20,22 @@ import {
   IonCardSubtitle,
   IonCardHeader,
   IonCardContent,
-  IonAvatar,
-} from '@ionic/angular/standalone';
+  IonAvatar, IonItem } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from 'src/app/explore-container/explore-container.component';
 import { Song } from 'src/app/core/interfaces/song';
 import { arrowForwardOutline, searchOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { AuthentificationService } from 'src/app/core/services/authentification.service';
-import { IArtist, ISong, IUser } from 'src/app/core/interfaces/user';
 import { FirestoreService } from 'src/app/core/services/firestore.service';
+import { IAlbum, IArtist, ISong, IUser } from 'src/app/core/interfaces/user';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [
+  imports: [IonItem, 
     IonAvatar,
     IonCardContent,
     IonCardHeader,
@@ -55,6 +54,8 @@ import { FirestoreService } from 'src/app/core/services/firestore.service';
     CarouselComponent,
     TinyCardComponent,
     IonAvatar,
+    RouterLink
+    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
@@ -63,19 +64,22 @@ export class HomePage implements OnInit {
   private firebase = inject(FirestoreService);
   songs: ISong[] = [];
   artists: IArtist[] = [];
+  albums: IAlbum[] = [];
   users: IUser[] = [];
   constructor() {
     addIcons({ searchOutline, arrowForwardOutline });
   }
-
+  private router = inject(Router);
   ngOnInit() {
     this.firebase.getDocumentsFromGroupCollection().subscribe((res) => {
       this.songs = res;
+      
+      
     });
+   
+   
 
-    this.firebase.getArtists().subscribe((res) => {
-      this.artists = res;
-    });
+   
   }
 
   selectedCategory: string = 'All';
@@ -83,4 +87,11 @@ export class HomePage implements OnInit {
   selectCategory(category: string) {
     this.selectedCategory = category;
   }
+
+  redirectTo(route: string) {
+    this.router.navigate([route]);
+  }
+
+  
 }
+

@@ -1,4 +1,4 @@
-import { IArtist } from './../interfaces/user';
+import { IAlbum, IArtist } from './../interfaces/user';
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import {
@@ -129,6 +129,34 @@ export class FirestoreService {
             idDocument: doc.id,
             ...doc.data(),
           })) as ISong[]
+      )
+    );
+  }
+  
+  getDocumentsFromGroupCollectionAlbum(): Observable<IAlbum[]> {
+    const groupCollection = collectionGroup(this.db, 'song');
+    const querySnapshot = from(getDocs(groupCollection));
+    return querySnapshot.pipe(
+      map(
+        (snapshot) =>
+          snapshot.docs.map((doc) => ({
+            idDocument: doc.id,
+            ...doc.data(),
+          })) as IAlbum[]
+      )
+    );
+  }
+  
+  getDocumentsFromGroupCollectionArtist(): Observable<IArtist[]> {
+    const groupCollection = collectionGroup(this.db, 'song');
+    const querySnapshot = from(getDocs(groupCollection));
+    return querySnapshot.pipe(
+      map(
+        (snapshot) =>
+          snapshot.docs.map((doc) => ({
+            idDocument: doc.id,
+            ...doc.data(),
+          })) as IArtist[]
       )
     );
   }

@@ -1,4 +1,19 @@
+swiper-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
 
-
-
-
+    swiper-slide{
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        text-align: center;
+        .img-carou{
+         
+            width: 12vh;
+            height: 12vh;
+            border-radius: 16px;
+        }
+     
+    }
+}

@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Song } from '../../core/interfaces/song';
+import { Router } from '@angular/router';
+import { IAlbum, IArtist, ISong } from 'src/app/core/interfaces/user';
 
 @Component({
   selector: 'app-carousel',
@@ -10,11 +12,19 @@ import { Song } from '../../core/interfaces/song';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CarouselComponent implements OnInit {
-  @Input() title?: string = '';
-  @Input() img?: string = '';
+
+
+  private router = inject(Router);
+
   constructor() {}
 
   ngOnInit() {}
 
-  @Input() songs: Song[] = [];
+  @Input() songs: ISong[] = [];
+  @Input() artists: IArtist[] = [];
+  @Input() albums: IAlbum[] = [];
+  
+  redirectTo(route: string) {
+    this.router.navigate([route]);
+  }
 }

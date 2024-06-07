@@ -1,12 +1,16 @@
-<swiper-slide>
-  <div>
-    <div>
-      <img class="img-carou" [src]="img" width="100" height="100" />
-    </div>
+<swiper-container [slidesPerView]="2" [loop]="true">
+  @for (song of songs; track song) {
+  <swiper-slide>
+    
+     
+        <img class="img-carou" [src]="song.cover" />
+    
 
-    <ion-label>
-      <h2>{{ title }}</h2>
-      <!-- <p>{{ song.artist }}</p> -->
-    </ion-label>
-  </div>
-</swiper-slide>
+      <ion-label>
+        <h2>{{ song.title }}</h2>
+      </ion-label>
+    
+  </swiper-slide>
+
+  }
+</swiper-container>

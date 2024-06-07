@@ -1,5 +1,5 @@
 import { NgClass, NgFor } from '@angular/common';
-import { Component, EnvironmentInjector, OnInit, inject } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, EnvironmentInjector, OnInit, inject } from '@angular/core';
 import { RouterLinkActive } from '@angular/router';
 import {
   IonTabs,
@@ -36,6 +36,7 @@ import { FirestoreService } from 'src/app/core/services/firestore.service';
     NgFor,
     NgClass,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class TabsPage implements OnInit {
   public environmentInjector = inject(EnvironmentInjector);

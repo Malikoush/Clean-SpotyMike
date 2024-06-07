@@ -2,6 +2,11 @@ import { PlaylistPage } from './../../pages/playlist/playlist.page';
 import { FavoritePage } from './../../pages/favorite/favorite.page';
 import { Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { Component } from '@angular/core';
+
+
+
+
 
 export const routes: Routes = [
   {
