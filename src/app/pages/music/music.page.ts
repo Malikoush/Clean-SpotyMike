@@ -18,7 +18,7 @@ import { ellipsisHorizontalOutline } from 'ionicons/icons';
 import { FirestoreService } from 'src/app/core/services/firestore.service';
 import { IArtist, IPlaylist, ISong } from 'src/app/core/interfaces/user';
 import { LocalstorageService } from 'src/app/core/services/localstorage.service';
-import { EMPTY, Observable } from 'rxjs';
+import { EMPTY, Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-music',
@@ -41,15 +41,15 @@ import { EMPTY, Observable } from 'rxjs';
 })
 export class MusicPage implements OnInit {
   private activetedRoute = inject(ActivatedRoute);
-  title = '';
+  idDocument = '';
   userIdDocument: string = '';
   private localStorageService = inject(LocalstorageService);
   private firebase = inject(FirestoreService);
   songs: ISong[] = [];
   artist: IArtist[] = [];
-  playlist: IPlaylist[] = [];
+  playlist: IPlaylist = {} as IPlaylist;
 
-  ok: string[] = [];
+  idDocumentSongs: string[] = [];
   constructor() {
     addIcons({
       ellipsisHorizontalOutline,
@@ -58,43 +58,22 @@ export class MusicPage implements OnInit {
 
   ngOnInit() {
     this.userIdDocument = this.localStorageService.getElement('userIdDocument');
-    this.title = this.activetedRoute.snapshot.params['name'];
-    console.log(this.title);
+    this.idDocument = this.activetedRoute.snapshot.params['name'];
 
-    // this.firebase
-    //   .getUserPlaylistsById(this.userIdDocument, this.title)
-    //   .subscribe((res) => {
-    //     this.playlist = res;
-    //     this.playlist.map((playlist) => {
-    //       this.ok = playlist.song;
+    this.firebase
+      .getUserPlaylistsById(this.userIdDocument, this.idDocument)
+      .subscribe((res) => {
+        this.playlist = res;
+        this.idDocumentSongs = this.playlist.song.map((element: string) =>
+          element.trim()
+        );
 
-    //       this.ok.map((song) => {
-
-    //       });
-    //     });
-    //   });
-    // this.firebase.getSongsByIds('1').subscribe((res) => {
-    //   this.songs = res;
-    //   console.log(this.songs);
-    // });
-
-    // this.firebase.getUserArtist(this.userIdDocument).subscribe((res) => {
-    //   this.artist = res;
-    //   console.log(this.artist);
-    // });
-
-    // this.firebase
-    //   .getUserPlaylistsById(this.userIdDocument, this.title)
-    //   .subscribe((res) => {
-    //     res.map((playlist) => {
-    //       this.song = playlist.song;
-    //       console.log(this.song);
-    //     });
-    //   });
-
-    this.firebase.getDocumentsFromGroupCollection().subscribe((res) => {
-      this.songs = res;
-      console.log(this.songs);
-    });
+        if (this.idDocumentSongs.length > 0) {
+          this.firebase.getSongsByIds(this.idDocumentSongs).subscribe((res) => {
+            this.songs = res;
+            console.log(this.songs);
+          });
+        }
+      });
   }
 }
