@@ -1,14 +1,15 @@
 <ion-content [fullscreen]="true">
   <div class="container">
     <div class="flex justify-between mt-6">
-      <ion-avatar>
-        <img
+      <ion-avatar (click)="redirectTo('/account')">
+        <img 
           alt="Silhouette of a person's head"
           src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpublic-files.gumroad.com%2Fn6cx6u4llal243c43fmew42xh4yu&f=1&nofb=1&ipt=1a49ab24b32d1a401397810e13ea7a8b40e5105de61e9105fa3722b1b14a7292&ipo=images"
           class="w-8 h-8"
+
         />
       </ion-avatar>
-      <ion-icon class="search text-2xl" name="search-outline"></ion-icon>
+      <ion-icon class="search text-2xl" name="search-outline" (click)="redirectTo('/search')"></ion-icon>
     </div>
     <div class="new-album min-[375px]:mr-3">
       <div class="card">
@@ -107,7 +108,7 @@
         </div>
       </div>
 
-      <app-carousel [songs]="songs"> </app-carousel>
+      <app-carousel [artists]="artists"> </app-carousel>
     </div>
     <div class="categorie">
       <div class="header-cat">
@@ -117,7 +118,7 @@
         </div>
       </div>
 
-      <app-carousel [songs]="songs"> </app-carousel>
+      <app-carousel [albums]="albums"> </app-carousel>
     </div>
   </div>
 </ion-content>

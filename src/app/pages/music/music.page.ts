@@ -92,9 +92,14 @@ export class MusicPage implements OnInit {
     //     });
     //   });
 
-    this.firebase.getDocumentsFromGroupCollection().subscribe((res) => {
+    this.firebase. getAllSong().subscribe((res) => {
       this.songs = res;
       console.log(this.songs);
     });
+    this.firebase.getSongsByIds(["4I8eu6xxOOtU44CgIBXc"]).subscribe((res) => {
+      this.songs = res;
+      console.log(this.songs);
+    });
+    
   }
 }

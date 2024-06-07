@@ -1,4 +1,4 @@
-<swiper-container [slidesPerView]="2" [loop]="true">
+<swiper-container [slidesPerView]="3" [loop]="true">
   @for (song of songs; track song) {
   <swiper-slide>
     <img class="img-carou" [src]="song.cover" />
@@ -7,4 +7,22 @@
     </ion-label>
   </swiper-slide>
   }
+  @for (album of albums; track album) {
+    <swiper-slide>
+      <img class="img-carou" [src]="album.cover" />
+      <ion-label>
+        <h2>{{ album.nom}}</h2>
+      </ion-label>
+    </swiper-slide>
+    }
+    @for (artist of artists; track artist) {
+      <swiper-slide>
+        <img class="img-carou" [src]="artist.avatar" />
+        <ion-label>
+          <h2>{{ artist.fullname}}</h2>
+        </ion-label>
+      </swiper-slide>
+      }
+
+  
 </swiper-container>

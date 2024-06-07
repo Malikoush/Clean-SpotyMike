@@ -78,10 +78,16 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/topalbum/topalbum.page').then( m => m.TopalbumPage)
   },
   {
+    path: 'account',
+    loadComponent: () => import('./pages/account/account.page').then( m => m.AccountPage)
+  },
+  {
     path: '**',
     redirectTo: '/login',
     pathMatch: 'full',
   },
+  
+
 
 
 

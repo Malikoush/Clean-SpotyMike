@@ -4,6 +4,7 @@ import { ScreenOrientation } from '@capacitor/screen-orientation';
 import { Platform } from '@ionic/angular';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 
+
 register();
 @Component({
   selector: 'app-root',

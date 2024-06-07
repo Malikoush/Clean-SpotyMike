@@ -71,12 +71,21 @@ export class HomePage implements OnInit {
   }
   private router = inject(Router);
   ngOnInit() {
-    this.firebase.getDocumentsFromGroupCollection().subscribe((res) => {
+    this.firebase.getAllSong().subscribe((res) => {
       this.songs = res;
       
       
     });
-   
+    this.firebase.getAllAlbum().subscribe((res) => {
+      this.albums = res;
+      
+      
+    });
+    this.firebase.getAllArtist().subscribe((res) => {
+      this.artists = res;
+      
+      
+    });
    
 
    
