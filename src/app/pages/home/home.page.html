@@ -93,10 +93,9 @@
       @for (song of songs; track song) {
 
       <app-tiny-card
-        [title]="song.title"
-        [img]="song.cover"
-        [duration]="song.duration"
-        (click)="redirectTo('/play-music/music0')"
+        [song]="song"
+    
+        (click)="redirectTo('/play-music/'+ song.title)"
       ></app-tiny-card>
       }
     </div>

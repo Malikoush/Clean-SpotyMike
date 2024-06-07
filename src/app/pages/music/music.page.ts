@@ -96,7 +96,7 @@ export class MusicPage implements OnInit {
       this.songs = res;
       console.log(this.songs);
     });
-    this.firebase.getSongsByIds(["4I8eu6xxOOtU44CgIBXc"]).subscribe((res) => {
+    this.firebase.getSongsByIds(["4I8eu6xxOOtU44CgIBXc","oo1JYDAgz8Wm2YyHcGh6"]).subscribe((res) => {
       this.songs = res;
       console.log(this.songs);
     });

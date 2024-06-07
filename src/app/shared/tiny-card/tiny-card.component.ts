@@ -17,10 +17,9 @@ import { Song } from '../../core/interfaces/song';
   imports: [IonItem, IonLabel, IonThumbnail, IonIcon],
 })
 export class TinyCardComponent implements OnInit {
-  @Input() title?: string = '';
+
   @Input() nameArtist?: string = '';
-  @Input() duration?: string = '';
-  @Input() img?: string = '';
+
   constructor() {
     addIcons({ ellipsisHorizontal });
   }
