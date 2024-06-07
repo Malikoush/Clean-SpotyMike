@@ -15,7 +15,7 @@ import {
   IonIcon,
 } from '@ionic/angular/standalone';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
-import { NgClass, NgFor } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { addIcons } from 'ionicons';
 import {
   ellipsisVerticalOutline,
@@ -49,6 +49,7 @@ import { IPlaylist, ISong } from 'src/app/core/interfaces/user';
     NgFor,
     RouterLink,
     NgClass,
+    NgIf,
   ],
 })
 export class CardComponent implements OnInit {
@@ -57,6 +58,7 @@ export class CardComponent implements OnInit {
   @Input() nameArtist?: string = '';
   @Input() nbre?: number;
   @Input() idDocument?: string = '';
+  @Input() img?: string = '';
   name: string = '';
   isSelected = false;
   isHidden = false;

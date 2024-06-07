@@ -6,6 +6,15 @@
         alt="The Wisconsin State Capitol building in Madison, WI at night"
         width="100"
         height="100"
+        *ngIf="styles === 'playlist'"
+        class="rounded-lg"
+      />
+      <img
+        [src]="img"
+        alt="The Wisconsin State Capitol building in Madison, WI at night"
+        width="100"
+        height="100"
+        *ngIf="styles === 'music'"
         class="rounded-lg"
       />
     </div>

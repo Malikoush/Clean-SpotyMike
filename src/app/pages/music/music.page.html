@@ -6,12 +6,17 @@
       class="text-2xl mr-3"
     ></ion-icon>
   </div>
-  @for(song of songs; track $index){
+  @if(idDocumentSongs.length > 0){ @for(song of songs; track $index){
+
   <app-card
     styles="music"
+    [img]="song.cover"
     [title]="song.title"
-    [idDocument]="song.title"
+    [idDocument]="song.idDocument"
     class="p-3"
   ></app-card>
+  } }@else{
+  <div class="text-center text-gray-500 py-40">Aucune musique disponible</div>
+
   }
 </ion-content>
