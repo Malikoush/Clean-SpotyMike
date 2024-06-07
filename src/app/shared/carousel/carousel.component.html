@@ -1,7 +1,7 @@
 <swiper-container [slidesPerView]="3" [loop]="true">
   @for (song of songs; track song) {
   <swiper-slide>
-    <img class="img-carou" [src]="song.cover" />
+    <img class="img-carou" [src]="song.cover" (click)="redirectTo('/play-music/'+song.title)"/>
     <ion-label>
       <h2>{{ song.title }}</h2>
     </ion-label>
@@ -9,7 +9,7 @@
   }
   @for (album of albums; track album) {
     <swiper-slide>
-      <img class="img-carou" [src]="album.cover" />
+      <img class="img-carou" [src]="album.cover" (click)="redirectTo('/infoalbum')"/>
       <ion-label>
         <h2>{{ album.nom}}</h2>
       </ion-label>
@@ -17,7 +17,7 @@
     }
     @for (artist of artists; track artist) {
       <swiper-slide>
-        <img class="img-carou" [src]="artist.avatar" />
+        <img class="img-carou" [src]="artist.avatar" (click)="redirectTo('/infoartist')" />
         <ion-label>
           <h2>{{ artist.fullname}}</h2>
         </ion-label>

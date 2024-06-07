@@ -13,7 +13,7 @@
     </div>
     <div class="new-album min-[375px]:mr-3">
       <div class="card">
-        <ion-card-header>
+        <ion-card-header (click)="redirectTo('/infoalbum')">
           <ion-card-subtitle>New Album</ion-card-subtitle>
           <ion-card-title>R&B Hits</ion-card-title>
           <ion-card-subtitle> Discover 87 songs!</ion-card-subtitle>
@@ -27,7 +27,7 @@
         <div class="circleTwo"></div>
         <div class="circleThree"></div>
       </div>
-      <img class="img-album" src="https://picsum.photos/200" />
+      <img class="img-album" (click)="redirectTo('/infoalbum')" src="https://picsum.photos/200" />
     </div>
     <div class="categorie">
       <div class="header-cat">

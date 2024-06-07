@@ -81,6 +81,16 @@ export const routes: Routes = [
     path: 'account',
     loadComponent: () => import('./pages/account/account.page').then( m => m.AccountPage)
   },
+ 
+  {
+    path: 'infoalbum',
+    loadComponent: () => import('./pages/infoalbum/infoalbum.page').then( m => m.InfoalbumPage)
+  },
+ 
+  {
+    path: 'infoartist',
+    loadComponent: () => import('./pages/infoartist/infoartist.page').then( m => m.InfoartistPage)
+  },
   {
     path: '**',
     redirectTo: '/login',
