@@ -79,7 +79,25 @@ export class FirestoreService {
     );
   }
 
-  getSongsByIds(songIds: string[]): Observable<ISong[]> {
+  getSongsByIds(songIds: string[] | string): Observable<ISong[]> {
+    const songCollection = collectionGroup(this.db, 'song');
+    const querySnapshot = from(getDocs(songCollection));
+    return querySnapshot.pipe(
+      map((snapshot) =>
+        snapshot.docs
+          .filter((doc) => songIds.includes(doc.id))
+          .map(
+            (doc) =>
+              ({
+                idDocument: doc.id,
+                ...doc.data(),
+              } as ISong)
+          )
+      )
+    );
+  }
+
+  getOneSongsByIds(songIds: string): Observable<ISong[]> {
     const songCollection = collectionGroup(this.db, 'song');
     const querySnapshot = from(getDocs(songCollection));
     return querySnapshot.pipe(

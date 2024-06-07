@@ -46,6 +46,7 @@ export interface ISong {
   title: string;
   url: string;
   cover: string;
+  lyrics: string;
   duration: string;
   createdAt: string;
   updatedAt: string;
