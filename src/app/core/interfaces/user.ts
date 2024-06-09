@@ -24,6 +24,7 @@ export interface IArtist {
   followers?: IUser[];
   description?: string;
   albums?: IAlbum[];
+  like: number;
 }
 
 export interface IAlbum {
@@ -38,6 +39,7 @@ export interface IAlbum {
   song: ISong[];
   label: ILabel;
   visibility: boolean;
+  like: number;
 }
 
 export interface ISong {
@@ -51,6 +53,7 @@ export interface ISong {
   createdAt: string;
   updatedAt: string;
   visibility: boolean;
+  idArtist: string;
 }
 
 export interface ILabel {

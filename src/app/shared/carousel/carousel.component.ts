@@ -3,6 +3,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Song } from '../../core/interfaces/song';
 import { Router } from '@angular/router';
 import { IAlbum, IArtist, ISong } from 'src/app/core/interfaces/user';
+import { FirestoreService } from 'src/app/core/services/firestore.service';
 
 @Component({
   selector: 'app-carousel',
@@ -12,18 +13,24 @@ import { IAlbum, IArtist, ISong } from 'src/app/core/interfaces/user';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CarouselComponent implements OnInit {
-
-
+  @Input() title?: string = '';
+  @Input() nameArtist: string = '';
+  @Input() img?: string = '';
+  @Input() url: string = '';
+  @Input() type?: string = '';
   private router = inject(Router);
-
+  private firestore = inject(FirestoreService);
+  artist: IArtist = {} as IArtist;
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.type === 'song') {
+      this.firestore.getOneArtist(this.nameArtist).subscribe((data) => {
+        this.artist = data;
+      });
+    }
+  }
 
-  @Input() songs: ISong[] = [];
-  @Input() artists: IArtist[] = [];
-  @Input() albums: IAlbum[] = [];
-  
   redirectTo(route: string) {
     this.router.navigate([route]);
   }

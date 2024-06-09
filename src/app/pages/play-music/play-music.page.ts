@@ -24,6 +24,7 @@ import {
 } from 'ionicons/icons';
 import { FirestoreService } from 'src/app/core/services/firestore.service';
 import { ISong } from 'src/app/core/interfaces/user';
+import { LocalstorageService } from 'src/app/core/services/localstorage.service';
 
 @Component({
   selector: 'app-play-music',
@@ -45,8 +46,14 @@ import { ISong } from 'src/app/core/interfaces/user';
 export class PlayMusicPage implements OnInit {
   private activetedRoute = inject(ActivatedRoute);
   private firebase = inject(FirestoreService);
-  songs: ISong[] = [];
+  private localStorageService = inject(LocalstorageService);
+
+  song: ISong = {} as ISong;
   id: string = '';
+  nameArtist: string = '';
+  currentIndex: number = 0;
+  localStorageSongs: string[] = [];
+
   constructor() {
     addIcons({
       heartOutline,
@@ -63,9 +70,64 @@ export class PlayMusicPage implements OnInit {
 
   ngOnInit() {
     this.id = this.activetedRoute.snapshot.params['name'];
-
-    this.firebase.getOneSongsByIds(this.id).subscribe((data) => {
-      this.songs = data;
+    this.localStorageSongs = this.localStorageService.getElement('playlist');
+    console.log(this.localStorageSongs);
+    this.localStorageSongs.find((element, index) => {
+      if (element === this.id) {
+        this.currentIndex = index;
+      }
     });
+    this.firebase.getOneSong(this.id).subscribe((data) => {
+      this.song = data;
+      this.firebase.getOneArtist(this.song.idArtist).subscribe((data) => {
+        this.nameArtist = data.fullname;
+      });
+    });
+  }
+
+  playNext() {
+    if (this.currentIndex < this.localStorageSongs.length - 1) {
+      this.currentIndex++;
+      const nextIddocument = this.localStorageSongs[this.currentIndex];
+      this.firebase.getOneSong(nextIddocument).subscribe((data) => {
+        this.song = data;
+        this.firebase.getOneArtist(this.song.idArtist).subscribe((data) => {
+          this.nameArtist = data.fullname;
+        });
+      });
+    } else {
+      this.currentIndex = 0;
+      const nextIddocument = this.localStorageSongs[this.currentIndex];
+
+      this.firebase.getOneSong(nextIddocument).subscribe((data) => {
+        this.song = data;
+        this.firebase.getOneArtist(this.song.idArtist).subscribe((data) => {
+          this.nameArtist = data.fullname;
+        });
+      });
+    }
+  }
+
+  playPrevious() {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+      const previousIddocument = this.localStorageSongs[this.currentIndex];
+      this.firebase.getOneSong(previousIddocument).subscribe((data) => {
+        this.song = data;
+        this.firebase.getOneArtist(this.song.idArtist).subscribe((data) => {
+          this.nameArtist = data.fullname;
+        });
+      });
+    } else {
+      this.currentIndex = this.localStorageSongs.length - 1;
+      const previousIddocument = this.localStorageSongs[this.currentIndex];
+
+      this.firebase.getOneSong(previousIddocument).subscribe((data) => {
+        this.song = data;
+        this.firebase.getOneArtist(this.song.idArtist).subscribe((data) => {
+          this.nameArtist = data.fullname;
+        });
+      });
+    }
   }
 }

@@ -1,5 +1,4 @@
 <ion-content class="ion-padding">
-  @for(song of songs; track $index){
   <div class="flex justify-between mt-2">
     <ion-buttons class="text-white py-7">
       <ion-back-button defaultHref="/playlist"></ion-back-button>
@@ -21,7 +20,7 @@
     <div class="flex mt-6">
       <div class="pl-3 flex-col">
         <div class="font-bold text-lg">{{song.title}}</div>
-        <div class="text-gray-600 text-sm">Olivia Lyric</div>
+        <div class="text-gray-600 text-sm">{{nameArtist}}</div>
       </div>
 
       <div class="flex ml-auto">
@@ -80,7 +79,7 @@
 
     <div class="flex mt-2 text-3xl gap-8 ml-7 sm:justify-between">
       <ion-icon name="repeat-outline" class="text-gray-600"></ion-icon>
-      <div>
+      <div (click)="playPrevious()">
         <ion-icon
           name="play-skip-back-outline"
           class="text-secondary"
@@ -91,7 +90,7 @@
       >
         <ion-icon name="pause-outline" class="text-white"></ion-icon>
       </div>
-      <div>
+      <div (click)="playNext()">
         <ion-icon
           name="play-skip-forward-outline"
           class="text-secondary"
@@ -115,5 +114,4 @@
       </div>
     </div>
   </div>
-  }
 </ion-content>

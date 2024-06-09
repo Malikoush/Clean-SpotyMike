@@ -11,7 +11,7 @@ import {
   IonIcon,
 } from '@ionic/angular/standalone';
 import { CardComponent } from 'src/app/shared/card/card.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { Icon } from 'ionicons/dist/types/components/icon/icon';
 import { ellipsisHorizontalOutline } from 'ionicons/icons';
@@ -41,6 +41,7 @@ import { EMPTY, Observable, map } from 'rxjs';
 })
 export class MusicPage implements OnInit {
   private activetedRoute = inject(ActivatedRoute);
+  private route = inject(Router);
   idDocument = '';
   userIdDocument: string = '';
   private localStorageService = inject(LocalstorageService);
@@ -67,7 +68,10 @@ export class MusicPage implements OnInit {
         this.idDocumentSongs = this.playlist.song.map((element: string) =>
           element.trim()
         );
-
+        this.localStorageService.setElement(
+          'playlist',
+          JSON.stringify(this.idDocumentSongs)
+        );
         if (this.idDocumentSongs.length > 0) {
           this.firebase.getSongsByIds(this.idDocumentSongs).subscribe((res) => {
             this.songs = res;

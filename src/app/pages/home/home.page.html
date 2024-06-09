@@ -19,7 +19,9 @@
         <ion-card-header (click)="redirectTo('/infoalbum')">
           <ion-card-subtitle>New Album</ion-card-subtitle>
           <ion-card-title>R&B Hits</ion-card-title>
-          <ion-card-subtitle> Discover 87 songs!</ion-card-subtitle>
+          <ion-card-subtitle> Discover 87 </ion-card-subtitle>
+          <ion-card-subtitle class="ml-4 -mt-1"> songs!</ion-card-subtitle>
+
           <ion-icon
             class="arrow-forward"
             name="arrow-forward-outline"
@@ -31,7 +33,7 @@
         <div class="circleThree"></div>
       </div>
       <img
-        class="img-album"
+        class="img-album ml-2"
         (click)="redirectTo('/infoalbum')"
         src="https://picsum.photos/200"
       />
@@ -87,8 +89,18 @@
         <div class="font-bold">Top Song</div>
         <div class="text-primary" (click)="redirectTo('/topsong')">See All</div>
       </div>
-
-      <app-carousel [songs]="songs"> </app-carousel>
+      <div class="flex gap-3">
+        @for (topSong of topSongs; track topSong) {
+        <app-carousel
+          [title]="topSong.title"
+          [img]="topSong.cover"
+          [url]="'/play-music/' + topSong.idDocument"
+          [nameArtist]="topSong.idArtist"
+          type="song"
+        >
+        </app-carousel>
+        }
+      </div>
     </div>
     <div class="categorie">
       <div class="header-cat">
@@ -97,11 +109,10 @@
           See All
         </div>
       </div>
-      @for (song of songs; track song) {
-
+      @for (lastplayed of topSongs; track lastplayed) {
       <app-tiny-card
-        [song]="song"
-        (click)="redirectTo('/play-music/'+ song.idDocument)"
+        [song]="lastplayed"
+        (click)="redirectTo('/play-music/'+ lastplayed.idDocument)"
       ></app-tiny-card>
       }
     </div>
@@ -112,8 +123,16 @@
           See All
         </div>
       </div>
-
-      <app-carousel [artists]="artists"> </app-carousel>
+      <div class="flex gap-3">
+        @for (topArtist of topArtists; track topArtist) {
+        <app-carousel
+          [title]="topArtist.fullname"
+          [img]="topArtist.avatar"
+          [url]="'/infoartist/' + topArtist.idDocument"
+        >
+        </app-carousel>
+        }
+      </div>
     </div>
     <div class="categorie">
       <div class="header-cat">
@@ -122,8 +141,16 @@
           See All
         </div>
       </div>
-
-      <app-carousel [albums]="albums"> </app-carousel>
+      <div class="flex gap-3">
+        @for (topAlbum of topAlbums; track topAlbum) {
+        <app-carousel
+          [title]="topAlbum.nom"
+          [img]="topAlbum.cover"
+          [url]="'/infoalbum/' + topAlbum.idDocument"
+        >
+        </app-carousel>
+        }
+      </div>
     </div>
   </div>
 </ion-content>

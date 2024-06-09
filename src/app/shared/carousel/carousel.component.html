@@ -1,36 +1,7 @@
-<swiper-container [slidesPerView]="3" [loop]="true">
-  @for (song of songs; track song) {
-  <swiper-slide>
-    <img
-      class="img-carou"
-      [src]="song.cover"
-      (click)="redirectTo('/play-music/' + song.idDocument)"
-    />
-    <ion-label>
-      <h2>{{ song.title }}</h2>
-    </ion-label>
-  </swiper-slide>
-  } @for (album of albums; track album) {
-  <swiper-slide>
-    <img
-      class="img-carou"
-      [src]="album.cover"
-      (click)="redirectTo('/infoalbum')"
-    />
-    <ion-label>
-      <h2>{{ album.nom }}</h2>
-    </ion-label>
-  </swiper-slide>
-  } @for (artist of artists; track artist) {
-  <swiper-slide>
-    <img
-      class="img-carou"
-      [src]="artist.avatar"
-      (click)="redirectTo('/infoartist')"
-    />
-    <ion-label>
-      <h2>{{ artist.fullname }}</h2>
-    </ion-label>
-  </swiper-slide>
-  }
-</swiper-container>
+<div class="flex-col">
+  <img class="img-carou" [src]="img" (click)="redirectTo(url)" />
+  <ion-label>
+    <h2 class="text-second">{{ title }}</h2>
+    <h6 class="text-gray-400">{{ artist.fullname }}</h6>
+  </ion-label>
+</div>
