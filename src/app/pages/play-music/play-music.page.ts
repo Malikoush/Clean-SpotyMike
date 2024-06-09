@@ -45,8 +45,9 @@ import { ISong } from 'src/app/core/interfaces/user';
 export class PlayMusicPage implements OnInit {
   private activetedRoute = inject(ActivatedRoute);
   private firebase = inject(FirestoreService);
-  songs: ISong[] = [];
+  song: ISong = {} as ISong;
   id: string = '';
+  nameArtist: string = '';
   constructor() {
     addIcons({
       heartOutline,
@@ -64,8 +65,11 @@ export class PlayMusicPage implements OnInit {
   ngOnInit() {
     this.id = this.activetedRoute.snapshot.params['name'];
 
-    this.firebase.getOneSongsByIds(this.id).subscribe((data) => {
-      this.songs = data;
+    this.firebase.getOneSong(this.id).subscribe((data) => {
+      this.song = data;
+      this.firebase.getOneArtist(this.song.idArtist).subscribe((data) => {
+        this.nameArtist = data.fullname;
+      });
     });
   }
 }

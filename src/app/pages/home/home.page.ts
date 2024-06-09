@@ -1,7 +1,8 @@
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
-  OnInit, inject,
+  OnInit,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -20,7 +21,9 @@ import {
   IonCardSubtitle,
   IonCardHeader,
   IonCardContent,
-  IonAvatar, IonItem } from '@ionic/angular/standalone';
+  IonAvatar,
+  IonItem,
+} from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from 'src/app/explore-container/explore-container.component';
 import { Song } from 'src/app/core/interfaces/song';
 import { arrowForwardOutline, searchOutline } from 'ionicons/icons';
@@ -35,7 +38,8 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [IonItem, 
+  imports: [
+    IonItem,
     IonAvatar,
     IonCardContent,
     IonCardHeader,
@@ -54,41 +58,32 @@ import { Router, RouterLink } from '@angular/router';
     CarouselComponent,
     TinyCardComponent,
     IonAvatar,
-    RouterLink
-    
+    RouterLink,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage implements OnInit {
   private auth = inject(AuthentificationService);
   private firebase = inject(FirestoreService);
-  songs: ISong[] = [];
-  artists: IArtist[] = [];
-  albums: IAlbum[] = [];
+  topSongs: ISong[] = [];
+  topArtists: IArtist[] = [];
+  topAlbums: IAlbum[] = [];
   users: IUser[] = [];
   constructor() {
     addIcons({ searchOutline, arrowForwardOutline });
   }
   private router = inject(Router);
   ngOnInit() {
-    this.firebase.getAllSong().subscribe((res) => {
-      this.songs = res;
-      
-      
+    this.firebase.getTopAlbum().subscribe((res) => {
+      this.topAlbums = res;
     });
-    this.firebase.getAllAlbum().subscribe((res) => {
-      this.albums = res;
-      
-      
+    this.firebase.getTopArtist().subscribe((res) => {
+      this.topArtists = res;
     });
-    this.firebase.getAllArtist().subscribe((res) => {
-      this.artists = res;
-      
-      
-    });
-   
 
-   
+    this.firebase.getTopSongs().subscribe((res) => {
+      this.topSongs = res;
+    });
   }
 
   selectedCategory: string = 'All';
@@ -100,7 +95,4 @@ export class HomePage implements OnInit {
   redirectTo(route: string) {
     this.router.navigate([route]);
   }
-
-  
 }
-
