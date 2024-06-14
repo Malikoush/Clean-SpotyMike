@@ -86,9 +86,20 @@
         ></ion-icon>
       </div>
       <div
-        class="w-10 h-8 -mt-1 bg-primary rounded-full flex items-center justify-center"
+        class="w-10 h-8 -mt-1 bg-primary rounded-full mr-1 flex items-center justify-center"
       >
-        <ion-icon name="pause-outline" class="text-white"></ion-icon>
+        <ion-icon
+          name="play-outline"
+          class="text-white"
+          *ngIf="!isPlaying"
+          (click)="playMusic()"
+        ></ion-icon>
+        <ion-icon
+          name="pause-outline"
+          class="text-white"
+          *ngIf="isPlaying"
+          (click)="pauseMusic()"
+        ></ion-icon>
       </div>
       <div (click)="playNext()">
         <ion-icon
