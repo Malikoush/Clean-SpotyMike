@@ -25,11 +25,6 @@ export const routes: Routes = [
   },
 
   {
-    path: 'search',
-    loadComponent: () =>
-      import('./pages/search/search.page').then((m) => m.SearchPage),
-  },
-  {
     path: 'categorie',
     loadComponent: () =>
       import('./pages/categorie/categorie.page').then((m) => m.CategoriePage),
@@ -95,7 +90,7 @@ export const routes: Routes = [
   },
 
   {
-    path: 'infoalbum/:id',
+    path: 'album/:id',
     loadComponent: () =>
       import('./pages/infoalbum/infoalbum.page').then((m) => m.InfoalbumPage),
   },

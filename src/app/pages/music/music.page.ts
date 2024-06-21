@@ -48,6 +48,7 @@ export class MusicPage implements OnInit {
   songs: ISong[] = [];
   artist: IArtist[] = [];
   playlist: IPlaylist = {} as IPlaylist;
+  infoArtist: IArtist = {} as IArtist;
 
   idDocumentSongs: string[] = [];
   constructor() {
@@ -71,9 +72,15 @@ export class MusicPage implements OnInit {
         if (this.idDocumentSongs.length > 0) {
           this.firebase.getSongsByIds(this.idDocumentSongs).subscribe((res) => {
             this.songs = res;
-            console.log(this.songs);
           });
         }
       });
+  }
+
+  fullNameArtist(idDocument: string) {
+    this.firebase.getOneArtist(idDocument).subscribe((res) => {
+      this.infoArtist = res;
+      return this.infoArtist.fullname.toString();
+    });
   }
 }

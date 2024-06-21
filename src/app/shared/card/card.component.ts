@@ -23,7 +23,8 @@ import {
   shareSocialOutline,
 } from 'ionicons/icons';
 import { Router, RouterLink } from '@angular/router';
-import { IPlaylist, ISong } from 'src/app/core/interfaces/user';
+import { IArtist, IPlaylist, ISong } from 'src/app/core/interfaces/user';
+import { FirestoreService } from 'src/app/core/services/firestore.service';
 
 @Component({
   selector: 'app-card',
@@ -57,14 +58,17 @@ export class CardComponent implements OnInit {
   @Input() title?: string = '';
   @Input() nameArtist?: string = '';
   @Input() nbre?: number;
-  @Input() idDocument?: string = '';
+  @Input() idDocument?: string;
+  @Input() idArtist?: string;
+
   @Input() img?: string = '';
   name: string = '';
   isSelected = false;
   isHidden = false;
+  infosArtist: IArtist = {} as IArtist;
 
   private router = inject(Router);
-
+  private firestoreService = inject(FirestoreService);
   constructor() {
     addIcons({ heartOutline, shareSocialOutline, ellipsisVerticalOutline });
   }
@@ -72,8 +76,14 @@ export class CardComponent implements OnInit {
   ngOnInit() {
     console.log(this.idDocument);
 
-    if (this.styles === 'music') {
+    if (this.styles === 'music' && !this.nameArtist) {
       this.name = 'music';
+      this.firestoreService
+        .getOneArtist(this.idArtist as string)
+        .subscribe((res) => {
+          this.infosArtist = res;
+          console.log(this.infosArtist);
+        });
     } else {
       this.name = 'playlist';
     }
@@ -84,9 +94,19 @@ export class CardComponent implements OnInit {
 
     if (this.name === 'music') {
       this.router.navigate(['/play-music/' + url]);
-    } else {
+    }
+
+    if (this.name === 'playlist') {
       this.router.navigate(['/music/' + url]);
     }
+    if (this.name === 'artist') {
+      this.router.navigate(['/artist/' + url]);
+    }
+
+    if (this.styles === 'album') {
+      this.router.navigate(['/album/' + url]);
+    }
+
     // 2 secondes pour l'animation de disparition
   }
 }

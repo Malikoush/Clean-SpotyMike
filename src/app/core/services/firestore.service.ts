@@ -12,8 +12,10 @@ import {
   collectionGroup,
   orderBy,
   limit,
+  or,
+  and,
 } from 'firebase/firestore/lite';
-import { Observable, from, map, mergeMap } from 'rxjs';
+import { Observable, combineLatest, from, map, mergeMap } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { IPlaylist, ISong, IUser } from '../interfaces/user';
 
@@ -247,6 +249,141 @@ export class FirestoreService {
             ...doc.data(),
           })) as IAlbum[]
       )
+    );
+  }
+
+  /**
+   *
+   *    SEARCH
+   *
+   */
+
+  getSearchAlbum(filterText?: string): Observable<IAlbum[]> {
+    const groupCollection = collectionGroup(this.db, 'album');
+    const querySnapshot = from(getDocs(groupCollection));
+    return querySnapshot.pipe(
+      map(
+        (snapshot) =>
+          snapshot.docs.map((doc) => ({
+            idDocument: doc.id,
+            ...doc.data(),
+          })) as IAlbum[]
+      ),
+      map((albums) => {
+        // Filtre les albums par visibilité et par nom, year ou catégories si filterText est défini
+        return albums.filter(
+          (album) =>
+            album.visibility &&
+            (!filterText ||
+              album.nom.toLowerCase().includes(filterText.toLowerCase()) ||
+              album.year.includes(filterText) ||
+              album.categ.some((category) =>
+                category.toLowerCase().includes(filterText.toLowerCase())
+              ))
+        );
+      })
+    );
+  }
+  getSearchSong(filterText?: string): Observable<ISong[]> {
+    const groupCollection = collectionGroup(this.db, 'song');
+    const querySnapshot = from(getDocs(groupCollection));
+    return querySnapshot.pipe(
+      map(
+        (snapshot) =>
+          snapshot.docs.map((doc) => ({
+            idDocument: doc.id,
+            ...doc.data(),
+          })) as ISong[]
+      ),
+      map((songs) => {
+        // Filtre les songs par visibilité et par nom, year ou catégories si filterText est défini
+        return songs.filter(
+          (song) =>
+            song.visibility &&
+            (!filterText ||
+              song.title.toLowerCase().includes(filterText.toLowerCase()))
+        );
+      })
+    );
+  }
+  getSearchArtist(filterText?: string): Observable<IArtist[]> {
+    const groupCollection = collectionGroup(this.db, 'artist');
+    const querySnapshot = from(getDocs(groupCollection));
+    return querySnapshot.pipe(
+      map(
+        (snapshot) =>
+          snapshot.docs.map((doc) => ({
+            idDocument: doc.id,
+            ...doc.data(),
+          })) as IArtist[]
+      ),
+      map((artits) => {
+        // Filtre les artits par visibilité et par nom, year ou catégories si filterText est défini
+        return artits.filter(
+          (artist) =>
+            artist.active &&
+            (!filterText ||
+              artist.fullname.toLowerCase().includes(filterText.toLowerCase()))
+        );
+      })
+    );
+  }
+
+  getSearchResults(
+    filterText: string
+  ): Observable<{ albums: IAlbum[]; songs: ISong[]; artists: IArtist[] }> {
+    const albumCollection = collectionGroup(this.db, 'album');
+    const songCollection = collectionGroup(this.db, 'song');
+    const artistCollection = collectionGroup(this.db, 'artist');
+
+    const albumQuery = from(getDocs(albumCollection)).pipe(
+      map((snapshot) =>
+        snapshot.docs.map((doc) => ({
+          albumId: doc.id,
+          ...(doc.data() as IAlbum),
+        }))
+      )
+    );
+
+    const songQuery = from(getDocs(songCollection)).pipe(
+      map((snapshot) =>
+        snapshot.docs.map((doc) => ({
+          songId: doc.id,
+          ...(doc.data() as ISong),
+        }))
+      )
+    );
+    const artistQuery = from(getDocs(artistCollection)).pipe(
+      map((snapshot) =>
+        snapshot.docs.map((doc) => ({
+          arttistId: doc.id,
+          ...(doc.data() as IArtist),
+        }))
+      )
+    );
+
+    return combineLatest([albumQuery, songQuery, artistQuery]).pipe(
+      map(([albums, songs, artists]) => ({
+        albums: albums.filter(
+          (album) =>
+            album.visibility &&
+            (album.nom.toLowerCase().includes(filterText.toLowerCase()) ||
+              album.year.includes(filterText) ||
+              album.categ.some((category) =>
+                category.toLowerCase().includes(filterText.toLowerCase())
+              ))
+        ),
+        songs: songs.filter(
+          (song) =>
+            song.visibility &&
+            song.title.toLowerCase().includes(filterText.toLowerCase())
+        ),
+        artists: artists.filter(
+          (artist) =>
+            artist.active &&
+            artist.fullname.toLowerCase().includes(filterText.toLowerCase())
+        ),
+      }))
     );
   }
 

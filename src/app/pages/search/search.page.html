@@ -1,13 +1,120 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>search</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
+  <div class="flex justify-between mt-11">
+    <div class="flex w-full">
+      <div class="grow">
+        <input
+          autocomplete="off"
+          [(ngModel)]="searchInput"
+          id="search"
+          name="search"
+          (input)="search()"
+          class="search-input w-full border-2 border-gray-100 rounded-full h-12 py-2 text-sm placeholder-gray-400 focus:border-primary focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-primary sm:text-sm"
+          placeholder="Search...."
+          type="search"
+        />
+      </div>
+      <div class="absolute items-center p-2 mt-1.5 block">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="w-5 h-5 relative text-gray-400"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </div>
+      <div class="absolute flex items-center p-2 mt-1.5 end-4">
+        <ion-icon id="open-modal" name="options-outline"></ion-icon>
+      </div>
+    </div>
+  </div>
+  @if (!showResults ) {
+  <div class="text-secondary mt-11">Parcourir les catégories</div>
+  <div class="grid grid-cols-3 gap-4 mt-3 max-[320px]:ml-6 min-[321px]:ml-10">
+    @for(categorie of categories; track categorie) {
+    <div class="flex-col">
+      <div>
+        <img [src]=" categorie.image " alt="" width="50" height="50" />
+      </div>
+      <div class="font-bold">{{ categorie.name }}</div>
+    </div>
+    }
+  </div>
+  }@else { @if (searchResults.albums.length > 0 || searchResults.songs.length >
+  0 || searchResults.artists.length > 0) { @for (searchResultsAlbum of
+  searchResults.albums; track $index) {
+  <app-card
+    styles="album"
+    [img]="searchResultsAlbum.cover"
+    [title]="searchResultsAlbum.nom"
+    [idDocument]="searchResultsAlbum.albumId"
+    class="p-3"
+  ></app-card>
+  } @for (searchResultsSong of searchResults.songs; track $index) {
+  <app-card
+    styles="music"
+    [img]="searchResultsSong.cover"
+    [title]="searchResultsSong.title"
+    [nameArtist]="artist.fullname"
+    [idDocument]="searchResultsSong.songId"
+    class="p-3"
+  ></app-card>
+  } @for (searchResultsArtist of searchResults.artists; track $index) {
+  <app-card
+    styles="artist"
+    [img]="searchResultsArtist.avatar"
+    [title]="searchResultsArtist.fullname"
+    [idDocument]="searchResultsArtist.arttistId"
+    class="p-3"
+  ></app-card>
+  } }@else{
+  <div class="text-center text-gray-500 py-40">Aucun resultat</div>
+  } }
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">search</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-modal
+    trigger="open-modal"
+    [initialBreakpoint]="0.25"
+    [breakpoints]="[0, 0.25, 0.5, 0.75]"
+    handleBehavior="cycle"
+  >
+    <ng-template>
+      <ion-content class="ion-padding">
+        <div class="ion-margin-top">
+          <ion-label class="text-primary font-bold text-xl ml-24"
+            >Filtre par :</ion-label
+          >
+          <div class="flex-col mt-3">
+            <div class="ml-20">
+              <ion-toggle
+                color="success"
+                (ionChange)="onFilterChange('artist', $event)"
+                >Artist</ion-toggle
+              >
+            </div>
+            <hr />
+            <div class="mt-6 ml-20">
+              <ion-toggle (ionChange)="onFilterChange('song', $event)"
+                >Song</ion-toggle
+              >
+            </div>
+            <hr />
+            <div class="mt-6 ml-20">
+              <ion-toggle (ionChange)="onFilterChange('album', $event)"
+                >Albums</ion-toggle
+              >
+            </div>
+            <div *ngIf="selectedFilter" class="mt-6 ml-20">
+              <ion-label class="text-primary font-bold"
+                >Selected Filter: {{ selectedFilter }}</ion-label
+              >
+            </div>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

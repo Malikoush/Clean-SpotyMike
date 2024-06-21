@@ -1,6 +1,17 @@
 import { NgClass, NgFor } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA, Component, EnvironmentInjector, OnInit, inject } from '@angular/core';
-import { RouterLinkActive } from '@angular/router';
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  EnvironmentInjector,
+  OnInit,
+  inject,
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterLinkActive,
+} from '@angular/router';
 import {
   IonTabs,
   IonTabBar,
@@ -40,7 +51,9 @@ import { FirestoreService } from 'src/app/core/services/firestore.service';
 })
 export class TabsPage implements OnInit {
   public environmentInjector = inject(EnvironmentInjector);
-  private albumService = inject(FirestoreService)
+  private albumService = inject(FirestoreService);
+  private activetedRoute = inject(ActivatedRoute);
+  private router = inject(Router);
   tabs = [
     {
       name: 'home',
@@ -78,15 +91,27 @@ export class TabsPage implements OnInit {
       personSharp,
       heartSharp,
     });
+    // Subscribe to route changes
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.updateActiveTab();
+      }
+    });
   }
 
   ngOnInit() {
-    this.tabs[0].isActive = true;
+    this.updateActiveTab();
   }
 
   activateTab(tabName: string) {
     this.tabs.forEach((tab) => {
       tab.isActive = tab.name === tabName;
+    });
+  }
+  private updateActiveTab() {
+    const currentUrl = this.router.url.split('/')[1];
+    this.tabs.forEach((tab) => {
+      tab.isActive = tab.name === currentUrl;
     });
   }
 }

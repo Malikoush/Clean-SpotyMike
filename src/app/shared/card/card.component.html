@@ -17,20 +17,66 @@
         *ngIf="styles === 'music'"
         class="rounded-lg"
       />
+      <img
+        [src]="img"
+        alt="The Wisconsin State Capitol building in Madison, WI at night"
+        width="100"
+        height="100"
+        *ngIf="styles === 'artist'"
+        class="rounded-lg"
+      />
+
+      <img
+        [src]="img"
+        alt="The Wisconsin State Capitol building in Madison, WI at night"
+        width="100"
+        height="100"
+        *ngIf="styles === 'album'"
+        class="rounded-lg"
+      />
     </div>
 
     <div class="pl-3 flex-col">
       <div class="font-bold w-full">{{ title }}</div>
-      <div class="text-gray-500 text-sm">{{ nbre }} Songs</div>
+      <div class="text-gray-500 text-sm" *ngIf="styles === 'playlist'">
+        {{ nbre }} Songs
+      </div>
+      <div class="text-gray-500 text-sm" *ngIf="styles === 'artist'">
+        Artist
+      </div>
+      <div class="text-gray-500 text-sm" *ngIf="styles === 'album'">Album</div>
+      <div class="text-gray-500 text-sm" *ngIf="styles === 'music'">
+        @if (nameArtist) {
+        {{ nameArtist }}
+
+        }@else {
+        {{ infosArtist.fullname }}
+
+        }
+      </div>
     </div>
     <div class="flex-col ml-auto">
       <div>
         <ion-icon name="ellipsis-vertical-outline"></ion-icon>
       </div>
 
-      <div class="flex ml-auto mt-9">
+      <div class="flex ml-auto mt-9 gap-2">
         <div
           class="w-6 h-6 border-2 border-gray-400 rounded-full flex items-center justify-center"
+          *ngIf="
+            styles === 'artist' || styles === 'music' || styles === 'album'
+          "
+        >
+          <ion-icon
+            name="heart-outline"
+            class="text-gray-900 text-2xl"
+          ></ion-icon>
+        </div>
+        <div
+          class="w-6 h-6 border-2 border-gray-400 rounded-full flex items-center justify-center"
+          *ngIf="
+            styles === 'playlist' || styles === 'music' || styles === 'album'
+          "
         >
           <ion-icon
             name="share-social-outline"

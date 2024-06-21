@@ -4,10 +4,6 @@ import { Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
 import { Component } from '@angular/core';
 
-
-
-
-
 export const routes: Routes = [
   {
     path: '',
@@ -41,6 +37,12 @@ export const routes: Routes = [
         path: 'profil',
         loadComponent: () =>
           import('../../pages/profil/profil.page').then((m) => m.ProfilPage),
+      },
+
+      {
+        path: 'search',
+        loadComponent: () =>
+          import('../../pages/search/search.page').then((m) => m.SearchPage),
       },
       {
         path: '',

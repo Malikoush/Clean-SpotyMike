@@ -19,6 +19,7 @@ export interface IArtist {
   idDocument: string;
   _id: string;
   fullname: string;
+  arttistId?: string;
   avatar: string;
   active: boolean;
   followers?: IUser[];
@@ -29,6 +30,7 @@ export interface IArtist {
 
 export interface IAlbum {
   idDocument: string;
+  albumId?: string;
   _id: string;
   nom: string;
   categ: string[];
@@ -44,6 +46,7 @@ export interface IAlbum {
 
 export interface ISong {
   idDocument: string;
+  songId?: string;
   _id: string;
   title: string;
   url: string;

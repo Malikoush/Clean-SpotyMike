@@ -92,7 +92,7 @@ export class HomePage implements OnInit {
     this.selectedCategory = category;
   }
 
-  redirectTo(route: string) {
+  redirectTo(route?: string) {
     this.router.navigate([route]);
   }
 }
