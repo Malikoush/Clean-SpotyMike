@@ -38,9 +38,9 @@ export const routes: Routes = [
           import('../../pages/music/music.page').then((m) => m.MusicPage),
       },
       {
-        path: 'profil',
+        path: 'profils',
         loadComponent: () =>
-          import('../../pages/profil/profil.page').then((m) => m.ProfilPage),
+          import('../../shared/profils/profils.page').then((m) => m.ProfilsPage),
       },
       {
         path: '',
