@@ -23,6 +23,8 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./shared/tabs/tabs.routes').then((m) => m.routes),
   },
+ 
+ 
 
   {
     path: 'search',
@@ -37,7 +39,7 @@ export const routes: Routes = [
   {
     path: 'profil',
     loadComponent: () =>
-      import('./pages/profil/profil.page').then((m) => m.ProfilPage),
+      import('./pages/profiluser/profiluser.page').then((m) => m.ProfilUserPage),
   },
   {
     path: 'home',
@@ -108,8 +110,18 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'profils',
+    loadComponent: () => import('./shared/profils/profils.page').then( m => m.ProfilsPage)
+  },
+  {
     path: '**',
     redirectTo: '/login',
     pathMatch: 'full',
+  },  {
+    path: 'profilartist',
+    loadComponent: () => import('./pages/profilartist/profilartist.page').then( m => m.ProfilartistPage)
   },
+
+  
+
 ];
