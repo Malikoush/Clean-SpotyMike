@@ -1,0 +1,23 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .header{
+        
+        padding: 2vh;
+   
+        .title {
+            flex-grow: 1;
+            text-align: center;
+          }
+          
+          .ellipse {
+            flex-shrink: 0;
+          }
+    }
+    .content{
+        flex-grow: 1;
+        overflow-y: auto;
+    }
+}
