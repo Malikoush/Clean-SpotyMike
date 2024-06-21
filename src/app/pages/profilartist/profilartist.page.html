@@ -1,0 +1,63 @@
+<ion-content [fullscreen]="true">
+  <div class="container">
+    
+
+    <div class="header-profil">
+
+      <ion-avatar>
+        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+      <div>
+      <ion-text color="primary">
+        <h1>Jefrey</h1>
+      </ion-text>
+      <br>
+      <ion-text color="primary">
+        <p>second argument is font-size that you wish to always have. Its unit must be relative(vw, vh, ch) and not absolute(i.e not px, mm, pt). relative unit will make it change its size w.r.t the changing screen sizes.</p>
+      </ion-text>
+      <br>
+      <ion-button (click)="onPasswordLostModal()">Default</ion-button>
+      
+
+    </div>
+
+    
+
+    </div>
+    <div class="menu-artist">
+      <div [class.clicked]="selectedIndex === 0" (click)="onItemClick(0)">
+        <ion-text id="count">63</ion-text>
+        <ion-text>Album</ion-text>
+      </div>
+      <div [class.clicked]="selectedIndex === 1" (click)="onItemClick(1)">
+        <ion-text id="count">63</ion-text>
+        <ion-text>Album</ion-text>
+      </div>
+      <div [class.clicked]="selectedIndex === 2" (click)="onItemClick(2)">
+        <ion-text id="count">63</ion-text>
+        <ion-text>Album</ion-text>
+      </div>
+      <div [class.clicked]="selectedIndex === 3" (click)="onItemClick(3)">
+        <ion-text id="count">63</ion-text>
+        <ion-text>Album</ion-text>
+      </div>
+    </div>
+    @if(componentToShow === 'album'){
+      @for (playlist of playlists; track $index){
+        <div class="component">
+        <app-card
+          styles="playlist"
+          [title]="playlist.title"
+          [nbre]="playlist.song.length"
+          [idDocument]="playlist.idDocument"
+          class="p-3"
+        ></app-card>
+      </div>
+    }
+  }
+
+
+
+  </div>
+ 
+</ion-content>
