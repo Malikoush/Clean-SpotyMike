@@ -10,7 +10,7 @@ export interface IUser {
   updatedAt: string;
   tel?: string;
   sexe?: string;
-  following?: IArtist[];
+  following?: String[];
   playlist?: IPlaylist;
   artist?: IArtist;
 }
@@ -21,7 +21,7 @@ export interface IArtist {
   fullname: string;
   avatar: string;
   active: boolean;
-  followers?: IUser[];
+  followers?: String[];
   description?: string;
   albums?: IAlbum[];
   like: number;
