@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true">
+<ion-content fullscreen="true">
   <div class="container">
     <div class="flex justify-between mt-6 header">
       <ion-title (click)="showUserProfile()" class="title">Profil User</ion-title>
@@ -9,14 +9,19 @@
         name="ellipsis-horizontal"
       ></ion-icon>
     </div>
-    <div class="content">
-    @if(currentView === 'user'){
-    <app-profil></app-profil>
-  }
-  @if(currentView === 'artist'){
-    <app-profilartist></app-profilartist>
-  }
-</div>
+   
+      @if(currentView === 'user'){
+        <div class="content">
+      <app-profil></app-profil>
+    </div>
+    }
+    @if(currentView === 'artist'){
+      <div class="content">
+      <app-profilartist></app-profilartist>
+    </div>
+    }
+
+    
     </div>
      
    </ion-content>

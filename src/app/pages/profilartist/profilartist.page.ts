@@ -23,8 +23,8 @@ import { CardComponent } from 'src/app/shared/card/card.component';
 export class ProfilartistPage implements OnInit {
   private firebase = inject(FirestoreService);
   private modalCtl = inject(ModalController);
-  selectedIndex: number | null = null;
-  componentToShow: string | null = null;
+  selectedIndex: number | null = 0;
+  componentToShow: string | null = "album";
   userIdDocument: string = '';
   private localStorageService = inject(LocalstorageService);
   playlists: IPlaylist[] = [];

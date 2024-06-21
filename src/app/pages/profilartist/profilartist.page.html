@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true">
+<ion-content scroll-y="false">
   <div class="container">
     
 
@@ -31,15 +31,15 @@
       </div>
       <div [class.clicked]="selectedIndex === 1" (click)="onItemClick(1)">
         <ion-text id="count">63</ion-text>
-        <ion-text>Album</ion-text>
+        <ion-text>Song</ion-text>
       </div>
       <div [class.clicked]="selectedIndex === 2" (click)="onItemClick(2)">
         <ion-text id="count">63</ion-text>
-        <ion-text>Album</ion-text>
+        <ion-text>Followers</ion-text>
       </div>
       <div [class.clicked]="selectedIndex === 3" (click)="onItemClick(3)">
         <ion-text id="count">63</ion-text>
-        <ion-text>Album</ion-text>
+        <ion-text>Following</ion-text>
       </div>
     </div>
     @if(componentToShow === 'album'){
