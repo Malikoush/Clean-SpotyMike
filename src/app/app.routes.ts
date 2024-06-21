@@ -144,11 +144,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/categorie/categorie.page').then((m) => m.CategoriePage),
   },
-  {
-    path: 'profil',
-    loadComponent: () =>
-      import('./pages/profil/profil.page').then((m) => m.ProfilPage),
-  },
+  
   {
     path: 'home',
     loadComponent: () =>
