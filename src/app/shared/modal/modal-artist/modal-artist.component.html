@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>Welcome</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <p>
+    Veuillez entrer votre mail de connexion pour pouvoir recevoir un mail de
+    réinitialisation de mot de passe
+  </p>
+  <ion-item>
+    <ion-input
+      labelPlacement="stacked"
+      label="Enter your email"
+      placeholder="Your name"
+    ></ion-input>
+  </ion-item>
+  <!-- <div
+    *ngIf="
+      form.get('email')?.invalid &&
+      (form.get('email')?.dirty || form.get('email')?.touched)
+    "
+  >
+    <div *ngIf="form.get('email')?.errors?.['required']">
+      <p class="error">Email is required</p>
+    </div>
+    <div *ngIf="form.get('email')?.errors?.['pattern']">
+      <p class="error">Email format is invalid</p>
+    </div>
+  </div> -->
+</ion-content>

@@ -30,6 +30,7 @@ import {
   personOutline,
   personSharp,
 } from 'ionicons/icons';
+import { AudioService } from 'src/app/core/services/audio.service';
 import { FirestoreService } from 'src/app/core/services/firestore.service';
 
 @Component({
@@ -54,6 +55,7 @@ export class TabsPage implements OnInit {
   private albumService = inject(FirestoreService);
   private activetedRoute = inject(ActivatedRoute);
   private router = inject(Router);
+  private audioService = inject(AudioService);
   tabs = [
     {
       name: 'home',
@@ -74,7 +76,7 @@ export class TabsPage implements OnInit {
       isActive: false,
     },
     {
-      name: 'profil',
+      name: 'profils',
       iconOutline: 'person-outline',
       iconSharp: 'person-sharp',
       isActive: false,
@@ -101,6 +103,14 @@ export class TabsPage implements OnInit {
 
   ngOnInit() {
     this.updateActiveTab();
+  }
+
+  play(){
+    this.audioService.load();
+    this.audioService.play();
+  }
+  pause(){
+    this.audioService.pause();
   }
 
   activateTab(tabName: string) {

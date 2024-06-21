@@ -1,0 +1,36 @@
+.container {
+    position: relative;
+    .header{
+        
+    padding: 2vh;
+   
+    .title {
+        flex-grow: 1;
+        text-align: center;
+      }
+      
+      .ellipse {
+        flex-shrink: 0;
+      }
+    }
+    .header-profil{
+        
+    padding: 2vh;
+        display: flex;
+        flex-direction:row;
+        justify-content: space-between;
+        padding-top: 5vh;
+        padding-bottom: 5vh;
+        border-bottom: 0.1rem solid rgba(224, 224, 224, 1);
+        div{
+          
+        h1{
+            text-align: end;
+        }
+        }
+    }
+
+    .form{
+        padding: 2vh;
+    }
+}
