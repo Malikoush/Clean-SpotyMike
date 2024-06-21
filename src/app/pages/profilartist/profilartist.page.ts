@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonAvatar, IonText, IonButton } from '@ionic/angular/standalone';
 import { ModalController } from '@ionic/angular';
-import { ellipsisHorizontal } from 'ionicons/icons';
+import { ellipsisHorizontal, idCard } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { ModalArtistComponent } from 'src/app/shared/modal/modal-artist/modal-artist.component';
 import { IPlaylist } from 'src/app/core/interfaces/user';
@@ -40,6 +40,12 @@ export class ProfilartistPage implements OnInit {
   ngOnInit() {
     this.userIdDocument = this.localStorageService.getElement('userIdDocument');
     console.log(this.userIdDocument);
+
+    //get albumby idartist
+    //get song by idartist
+    //get follower by id 
+    //get following by id
+
     this.firebase.getUserPlaylists(this.userIdDocument).subscribe((res) => {
       this.playlists = res;
     });
