@@ -68,7 +68,10 @@ export class MusicPage implements OnInit {
         this.idDocumentSongs = this.playlist.song.map((element: string) =>
           element.trim()
         );
-
+        this.localStorageService.setElement(
+          'playlist',
+          JSON.stringify(this.idDocumentSongs)
+        );
         if (this.idDocumentSongs.length > 0) {
           this.firebase.getSongsByIds(this.idDocumentSongs).subscribe((res) => {
             this.songs = res;
