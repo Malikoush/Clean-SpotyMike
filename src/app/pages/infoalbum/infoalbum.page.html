@@ -1,13 +1,37 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>infoalbum</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
+  <div class="flex justify-between mt-2">
+    <ion-buttons class="text-white py-7">
+      <ion-back-button defaultHref="/playlist"></ion-back-button>
+    </ion-buttons>
+    <div class="text-white mt-8">Album</div>
+    <ion-icon
+      name="ellipsis-horizontal-outline"
+      class="text-2xl mt-8 mr-3 text-white"
+    ></ion-icon>
+  </div>
+  <div class="flex-col py-2">
+    <div>
+      <img
+        [src]="album.cover"
+        alt="The Wisconsin State Capitol building in Madison, WI at night"
+        class="rounded-xl h-80 w-full object-cover sm:h-96 md:h-80 lg:h-96"
+      />
+    </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">infoalbum</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <div class="flex-col mt-3 ml-28">
+      <h1 class="text-xl">{{album.nom}}</h1>
+      <h2 class="text-sm text-red-600">{{artist.fullname}}</h2>
+    </div>
+    <div class="flex ml-12 font-bold">
+      @for (categ of album.categ; track $index) {
+      <div class="text-sm">{{categ}}</div>
+      @if ($index < album.categ.length - 1) {
+      <div class="text-sm">/</div>
+      } }
+      <div class="text-sm">- {{album.year}} - {{album.label}}</div>
+    </div>
+
+     
+  </div>
+   
 </ion-content>
