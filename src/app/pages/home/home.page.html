@@ -112,7 +112,11 @@
       </div>
       @for (lastplayed of topSongs; track lastplayed) {
       <app-tiny-card
-        [song]="lastplayed"
+    
+        [image]="lastplayed.cover"
+        [title]="lastplayed.title"
+        [subtitle]="'unknown'"
+        [duration]="lastplayed.duration"
         (click)="redirectTo('/play-music/'+ lastplayed.idDocument)"
       ></app-tiny-card>
       }

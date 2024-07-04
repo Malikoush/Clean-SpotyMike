@@ -22,7 +22,7 @@ export interface IArtist {
   arttistId?: string;
   avatar: string;
   active: boolean;
-  followers?: String[];
+  follower?: String[];
   description?: string;
   albums?: IAlbum[];
   like: number;
