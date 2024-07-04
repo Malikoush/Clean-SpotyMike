@@ -11,6 +11,17 @@
             flex-grow: 1;
             text-align: center;
           }
+          .title.active::after {
+            content: "";
+            position: absolute;
+            bottom: -0.5vh;
+            left: 50%;
+            width: 5vw; /* Ajustez cette valeur pour la longueur du petit élément */
+            height: 0.5vh; /* Ajustez cette valeur pour l'épaisseur du petit élément */
+            background-color: black; /* Couleur du petit élément */
+            border-radius: 20%; /* Arrondir les bords du petit élément */
+            transform: translateX(-50%);
+        }
           
           .ellipse {
             flex-shrink: 0;

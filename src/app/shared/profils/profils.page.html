@@ -1,8 +1,8 @@
 <ion-content fullscreen="true">
   <div class="container">
     <div class="flex justify-between mt-6 header">
-      <ion-title (click)="showUserProfile()" class="title">Profil User</ion-title>
-      <ion-title (click)="showArtistProfile()" class="title">Profil Artist</ion-title>
+      <ion-title [class.active]="currentView === 'user'" (click)="showUserProfile()" class="title">Profil User</ion-title>
+      <ion-title [class.active]="currentView === 'artist'" (click)="showArtistProfile()" class="title">Profil Artist</ion-title>
       <ion-icon
       
         class="ellipse text-2xl"
