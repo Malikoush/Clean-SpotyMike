@@ -39,9 +39,10 @@ export interface IAlbum {
   createdAt: string;
   updatedAt: string;
   song: ISong[];
-  label: ILabel;
   visibility: boolean;
   like: number;
+  idArtist: string;
+  label: string;
 }
 
 export interface ISong {
@@ -57,12 +58,7 @@ export interface ISong {
   updatedAt: string;
   visibility: boolean;
   idArtist: string;
-}
-
-export interface ILabel {
-  idDocument: string;
-  _id: string;
-  nom: string;
+  idAlbum: string;
 }
 
 export interface IPlaylist {

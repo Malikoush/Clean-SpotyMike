@@ -91,12 +91,7 @@ export class LoginPage implements OnInit {
     addIcons({ eyeOutline, eyeOffOutline });
   }
 
-  ngOnInit(): void {
-    // this.userIdDocument = this.localStorageService.getElement('userIdDocument');
-    // if (this.userIdDocument) {
-    //   this.localStorageService.removeElement('userIdDocument');
-    // }
-  }
+  ngOnInit(): void {}
   onSubmit() {
     this.error = '';
     this.submitForm = true;

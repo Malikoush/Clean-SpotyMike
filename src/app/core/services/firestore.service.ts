@@ -301,6 +301,19 @@ getUsersByIds(ids : String[] | undefined): Observable<IUser[]> {
       )
     );
   }
+  getOneAlbum(idDocument: string): Observable<IAlbum> {
+    const songCollection = collectionGroup(this.db, 'album');
+    const querySnapshot = from(getDocs(songCollection));
+    return querySnapshot.pipe(
+      map((snapshot) => {
+        const doc = snapshot.docs.find((doc) => doc.id === idDocument);
+        return {
+          idDocument: doc?.id,
+          ...doc?.data(),
+        } as IAlbum;
+      })
+    );
+  }
   getTopAlbum(): Observable<IAlbum[]> {
     const groupCollection = collectionGroup(this.db, 'album');
     const topAlbumsQuery = query(

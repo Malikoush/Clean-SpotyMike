@@ -79,18 +79,29 @@
 
     <div class="flex mt-2 text-3xl gap-8 ml-7 sm:justify-between">
       <ion-icon name="repeat-outline" class="text-gray-600"></ion-icon>
-      <div>
+      <div (click)="playPrevious()">
         <ion-icon
           name="play-skip-back-outline"
           class="text-secondary"
         ></ion-icon>
       </div>
       <div
-        class="w-10 h-8 -mt-1 bg-primary rounded-full flex items-center justify-center"
+        class="w-10 h-8 -mt-1 bg-primary rounded-full mr-1 flex items-center justify-center"
       >
-        <ion-icon name="pause-outline" class="text-white"></ion-icon>
+        <ion-icon
+          name="play-outline"
+          class="text-white"
+          *ngIf="!isPlaying"
+          (click)="playMusic()"
+        ></ion-icon>
+        <ion-icon
+          name="pause-outline"
+          class="text-white"
+          *ngIf="isPlaying"
+          (click)="pauseMusic()"
+        ></ion-icon>
       </div>
-      <div>
+      <div (click)="playNext()">
         <ion-icon
           name="play-skip-forward-outline"
           class="text-secondary"
