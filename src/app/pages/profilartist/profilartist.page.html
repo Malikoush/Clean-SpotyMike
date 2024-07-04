@@ -5,18 +5,18 @@
     <div class="header-profil">
 
       <ion-avatar>
-        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+        <img alt="Silhouette of a person's head" src="{{artist.avatar}}" />
       </ion-avatar>
       <div>
       <ion-text color="primary">
-        <h1>Jefrey</h1>
+        <h1>{{ artist.fullname}}</h1>
       </ion-text>
       <br>
       <ion-text color="primary">
-        <p>second argument is font-size that you wish to always have. Its unit must be relative(vw, vh, ch) and not absolute(i.e not px, mm, pt). relative unit will make it change its size w.r.t the changing screen sizes.</p>
+        <p>{{artist.description}}</p>
       </ion-text>
       <br>
-      <ion-button (click)="onPasswordLostModal()">Default</ion-button>
+      <ion-button (click)="onPasswordLostModal()">Modify</ion-button>
       
 
     </div>

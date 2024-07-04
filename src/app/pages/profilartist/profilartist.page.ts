@@ -34,7 +34,8 @@ export class ProfilartistPage implements OnInit {
   playlists: IPlaylist[] = [];
   albums: IAlbum[] = [];
   songs: ISong[] = [];
-  //artist: IArtist = {} as IArtist;
+  artist: IArtist = {} as IArtist;
+  user: IUser = {} as IUser;
   followers: IUser[] = [];
   followersids :String[] | undefined = [];
   followings: IUser[] = [];
@@ -69,17 +70,13 @@ export class ProfilartistPage implements OnInit {
    
       
     });
-    this.firebase.getUser(this.userIdDocument).subscribe((res) => {
-     
-      this.followingsids = res.following;
    
-      
-    });
      //Récupérer info user et following
     this.firebase.getUser(this.userIdDocument).pipe(
       tap(user => {
         if (user && user.following) {
           this.followersids = user.following;
+          this.user = user;
         }
       }),
       switchMap(user => {
@@ -98,6 +95,7 @@ export class ProfilartistPage implements OnInit {
       tap(artist => {
         if (artist && artist.follower) {
           this.followersids = artist.follower;
+          this.artist = artist;
         }
       }),
       switchMap(artist => {
