@@ -18,13 +18,14 @@ import {
 import { Observable, combineLatest, from, map, mergeMap } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { IPlaylist, ISong, IUser } from '../interfaces/user';
-
+import * as jwt from 'jsonwebtoken';
 @Injectable({
   providedIn: 'root',
 })
 export class FirestoreService {
   private app = initializeApp(environment.firebaseConfig);
   private db = getFirestore(this.app);
+  private secretKey = environment.secretKey;
   constructor() {}
 
   /**
@@ -400,7 +401,10 @@ export class FirestoreService {
     );
   }
 
-  login($email: string, $password: string): Observable<IUser> {
+  login(
+    $email: string,
+    $password: string
+  ): Observable<{ user: IUser; token: string }> {
     const userCol = collection(this.db, 'users');
     const q = query(
       userCol,
@@ -409,13 +413,19 @@ export class FirestoreService {
     );
     const userSnapshot = from(getDocs(q));
     return userSnapshot.pipe(
-      map(
-        (snapshot) =>
-          ({
-            idDocument: snapshot.docs[0]?.id,
-            ...snapshot.docs[0]?.data(),
-          } as IUser)
-      )
+      map((snapshot) => {
+        const user = {
+          idDocument: snapshot.docs[0]?.id,
+          ...snapshot.docs[0]?.data(),
+        } as IUser;
+
+        // Générer un token JWT
+        const token = jwt.sign({ email: user.email }, this.secretKey, {
+          expiresIn: '2m',
+        });
+
+        return { user, token };
+      })
     );
   }
 }

@@ -23,8 +23,6 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./shared/tabs/tabs.routes').then((m) => m.routes),
   },
- 
- 
 
   {
     path: 'search',
@@ -39,7 +37,9 @@ export const routes: Routes = [
   {
     path: 'profil',
     loadComponent: () =>
-      import('./pages/profiluser/profiluser.page').then((m) => m.ProfilUserPage),
+      import('./pages/profiluser/profiluser.page').then(
+        (m) => m.ProfilUserPage
+      ),
   },
   {
     path: 'home',
@@ -55,11 +55,6 @@ export const routes: Routes = [
     path: 'playlist',
     loadComponent: () =>
       import('./pages/playlist/playlist.page').then((m) => m.PlaylistPage),
-  },
-  {
-    path: 'recherche',
-    loadComponent: () =>
-      import('./pages/recherche/recherche.page').then((m) => m.RecherchePage),
   },
 
   {
@@ -111,7 +106,8 @@ export const routes: Routes = [
   },
   {
     path: 'profils',
-    loadComponent: () => import('./shared/profils/profils.page').then( m => m.ProfilsPage)
+    loadComponent: () =>
+      import('./shared/profils/profils.page').then((m) => m.ProfilsPage),
   },
   {
     path: '**',
@@ -120,7 +116,10 @@ export const routes: Routes = [
   },
   {
     path: 'profilartist',
-    loadComponent: () => import('./pages/profilartist/profilartist.page').then( m => m.ProfilartistPage)
+    loadComponent: () =>
+      import('./pages/profilartist/profilartist.page').then(
+        (m) => m.ProfilartistPage
+      ),
   },
 
   {
@@ -144,7 +143,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/categorie/categorie.page').then((m) => m.CategoriePage),
   },
-  
+
   {
     path: 'home',
     loadComponent: () =>
@@ -159,11 +158,6 @@ export const routes: Routes = [
     path: 'playlist',
     loadComponent: () =>
       import('./pages/playlist/playlist.page').then((m) => m.PlaylistPage),
-  },
-  {
-    path: 'recherche',
-    loadComponent: () =>
-      import('./pages/recherche/recherche.page').then((m) => m.RecherchePage),
   },
 
   {

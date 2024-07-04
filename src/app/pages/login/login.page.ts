@@ -100,12 +100,13 @@ export class LoginPage implements OnInit {
       // this.router.navigateByUrl('/home');
       this.firebase
         .login(this.form.value.email, this.form.value.password)
-        .subscribe((user) => {
+        .subscribe(({ user, token }) => {
           if (user.idDocument) {
             this.localStorageService.setElement(
               'userIdDocument',
               JSON.stringify(user.idDocument)
-            ); // JSON.stringify( user);
+            );
+            this.localStorageService.setElement('token', token); // JSON.stringify( user);
             this.router.navigateByUrl('/home');
           } else {
             this.error = 'Email ou mot de passe incorrect';
