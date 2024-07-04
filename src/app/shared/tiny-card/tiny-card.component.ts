@@ -25,6 +25,9 @@ export class TinyCardComponent implements OnInit {
   }
 
   ngOnInit() {}
-
-  @Input() song!: Song;
+  @Input() styles?: string = '';
+  @Input() image?: string ="";
+  @Input() title?: string ="";
+  @Input() subtitle?: string="";
+  @Input() duration?: string="";
 }

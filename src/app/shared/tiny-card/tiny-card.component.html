@@ -1,13 +1,16 @@
 <ion-item class="no-border">
   <ion-thumbnail slot="start">
-    <img alt="Silhouette of mountains" [src]="song.cover" width="50" height="50" />
+    <img alt="Silhouette of mountains" [src]="image" width="50" height="50" />
   </ion-thumbnail>
   <ion-label
-    ><h2>{{ song.title }}</h2>
-    <p>{{ nameArtist }}</p></ion-label
+    ><h2>{{ title }}</h2>
+    <p>{{ subtitle }}</p></ion-label
   >
   <ion-label slot="end">
-    <p>{{ song.duration }}</p>
+    <p>{{ duration }}</p>
   </ion-label>
-  <ion-icon slot="end" name="ellipsis-horizontal"></ion-icon>
+  @if(styles !== 'user'){
+    <ion-icon slot="end" name="ellipsis-horizontal"></ion-icon>
+  }
+  
 </ion-item>
