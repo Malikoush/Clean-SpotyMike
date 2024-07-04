@@ -74,7 +74,7 @@ export class CardComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.idDocument);
+   // console.log(this.idDocument);
 
     if (this.styles === 'music' && !this.nameArtist) {
       this.name = 'music';
@@ -82,7 +82,7 @@ export class CardComponent implements OnInit {
         .getOneArtist(this.idArtist as string)
         .subscribe((res) => {
           this.infosArtist = res;
-          console.log(this.infosArtist);
+          //console.log(this.infosArtist);
         });
     } else {
       this.name = 'playlist';

@@ -92,7 +92,7 @@ export class SearchPage implements OnInit {
       optionsOutline,
     });
   }
-  selectedFilter: string = '';
+    selectedFilter: string = '';
 
   artist: IArtist = {} as IArtist;
   searchResults: { albums: IAlbum[]; songs: ISong[]; artists: IArtist[] } = {
