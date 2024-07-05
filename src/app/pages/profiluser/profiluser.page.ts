@@ -59,7 +59,7 @@ export class ProfilUserPage implements OnInit {
     email: new FormControl(''),
     phone: new FormControl(''),
   });
-
+  artistid: string = "";
   private modalCtl = inject(ModalController);
   private firebase = inject(FirestoreService);
   userIdDocument: string = '';
@@ -79,6 +79,13 @@ export class ProfilUserPage implements OnInit {
     this.firebase.getUser(this.userIdDocument).subscribe((res) => {
       this.user = res;
       console.log(this.user);
+      this.firebase.getUserArtist(this.userIdDocument).subscribe((res) => {
+   
+      
+        this.artistid = res[0].idDocument;
+        localStorage.setItem('artistId', JSON.stringify(this.artistid));
+        
+      });
 
       this.profilForm.patchValue({
         name: this.user.firstname,

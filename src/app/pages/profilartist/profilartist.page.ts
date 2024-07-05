@@ -30,10 +30,12 @@ export class ProfilartistPage implements OnInit {
   selectedIndex: number | null = 0;
   componentToShow: string | null = "album";
   userIdDocument: string = '';
+  artistIdDocument: string = '';
   private localStorageService = inject(LocalstorageService);
   playlists: IPlaylist[] = [];
   albums: IAlbum[] = [];
   songs: ISong[] = [];
+  
   artist: IArtist = {} as IArtist;
   user: IUser = {} as IUser;
   followers: IUser[] = [];
@@ -51,6 +53,7 @@ export class ProfilartistPage implements OnInit {
   }
   ngOnInit() {
     this.userIdDocument = this.localStorageService.getElement('userIdDocument');
+    this.artistIdDocument = this.localStorageService.getElement('artistId');
     //console.log(this.userIdDocument);
 
     //get albumby idartist
@@ -58,16 +61,18 @@ export class ProfilartistPage implements OnInit {
     //get follower by id 
     //get following by id
     //this.albumService.getAlbumsByArtist(artistId);
-    this.firebase.getArtistAlbums("auM675vCC1MMeldxXbmo").subscribe((res) => {
+  
+    this.firebase.getArtistAlbums(this.artistIdDocument).subscribe((res) => {
    
       
       this.albums = res;
     });
     
-    this.firebase.getArtistSongs("auM675vCC1MMeldxXbmo").subscribe((res) => {
+    this.firebase.getArtistSongs(this.artistIdDocument).subscribe((res) => {
      
       this.songs = res;
    
+      console.log(res);
       
     });
    
@@ -91,7 +96,7 @@ export class ProfilartistPage implements OnInit {
       this.followings = res;
     });
     //Récupérer info artiste et follower
-    this.firebase.getOneArtist("auM675vCC1MMeldxXbmo").pipe(
+    this.firebase.getOneArtist(this.artistIdDocument).pipe(
       tap(artist => {
         if (artist && artist.follower) {
           this.followersids = artist.follower;
