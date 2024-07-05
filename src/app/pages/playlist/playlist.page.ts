@@ -52,7 +52,6 @@ export class PlaylistPage {
 
   ngOnInit() {
     this.userIdDocument = this.localStorageService.getElement('userIdDocument');
-    console.log(this.userIdDocument);
     this.firebase.getUserPlaylists(this.userIdDocument).subscribe((res) => {
       this.playlists = res;
     });

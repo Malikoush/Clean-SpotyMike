@@ -45,8 +45,6 @@ export class CategoriePage implements OnInit {
       .getAllSongByCategory(this.nameCategory.toLowerCase())
       .subscribe((data) => {
         this.songs = data;
-
-        console.log(this.songs);
       });
   }
 }

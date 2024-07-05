@@ -83,7 +83,6 @@ export class PlayMusicPage implements OnInit {
     this.id = this.activetedRoute.snapshot.params['name'];
     this.localStorageSongs =
       this.localStorageService.getElement('playlist') || [];
-    console.log(this.localStorageSongs);
 
     this.firebase.getOneSong(this.id).subscribe((data) => {
       this.song = data;
@@ -91,9 +90,7 @@ export class PlayMusicPage implements OnInit {
         this.nameArtist = data.fullname;
       });
     });
-    this.localStorageSongs.map((element) => {
-      console.log(element);
-    });
+    this.localStorageSongs.map((element) => {});
   }
 
   playNext() {

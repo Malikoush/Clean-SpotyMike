@@ -62,7 +62,6 @@ export class InfoalbumPage implements OnInit {
       .getAllSongByOneAlbum(this.idDocument)
       .subscribe((res) => {
         this.songs = res;
-        console.log(this.songs);
       });
   }
 }

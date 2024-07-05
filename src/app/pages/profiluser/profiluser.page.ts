@@ -78,7 +78,6 @@ export class ProfilUserPage implements OnInit {
     this.userIdDocument = this.localStorageService.getElement('userIdDocument');
     this.firebase.getUser(this.userIdDocument).subscribe((res) => {
       this.user = res;
-      console.log(this.user);
 
       this.profilForm.patchValue({
         name: this.user.firstname,

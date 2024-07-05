@@ -123,7 +123,6 @@ export class LoginPage implements OnInit {
                   this.router.navigateByUrl('/home');
                 } else {
                   this.error = 'Email ou mot de passe incorrect';
-                  console.log(this.error);
                 }
               });
             this.router.navigateByUrl('/home');
