@@ -72,6 +72,7 @@ export class LoginPage implements OnInit {
   private modalCtl = inject(ModalController);
   private localStorageService = inject(LocalstorageService);
   private firebase = inject(FirestoreService);
+  private authService = inject(AuthentificationService);
   passwordFieldType: string = 'password';
 
   form: FormGroup = new FormGroup({
@@ -97,21 +98,47 @@ export class LoginPage implements OnInit {
     this.submitForm = true;
 
     if (this.form.valid) {
-      // this.router.navigateByUrl('/home');
-      this.firebase
+      this.authService
         .login(this.form.value.email, this.form.value.password)
-        .subscribe((user) => {
-          if (user.idDocument) {
+        .subscribe((res) => {
+          if (res) {
             this.localStorageService.setElement(
-              'userIdDocument',
-              JSON.stringify(user.idDocument)
-            ); // JSON.stringify( user);
+              'token',
+              JSON.stringify(res.accessToken)
+            );
+            this.firebase
+              .login(this.form.value.email, this.form.value.password)
+              .subscribe((user) => {
+                if (user.idDocument) {
+                  this.localStorageService.setElement(
+                    'userIdDocument',
+                    JSON.stringify(user.idDocument)
+                  ); // JSON.stringify( user);
+                  this.router.navigateByUrl('/home');
+                } else {
+                  this.error = 'Email ou mot de passe incorrect';
+                  console.log(this.error);
+                }
+              });
             this.router.navigateByUrl('/home');
-          } else {
-            this.error = 'Email ou mot de passe incorrect';
-            console.log(this.error);
           }
         });
+
+      // this.router.navigateByUrl('/home');
+      // this.firebase
+      //   .login(this.form.value.email, this.form.value.password)
+      //   .subscribe((user) => {
+      //     if (user.idDocument) {
+      //       this.localStorageService.setElement(
+      //         'userIdDocument',
+      //         JSON.stringify(user.idDocument)
+      //       ); // JSON.stringify( user);
+      //       this.router.navigateByUrl('/home');
+      //     } else {
+      //       this.error = 'Email ou mot de passe incorrect';
+      //       console.log(this.error);
+      //     }
+      //   });
     }
   }
 

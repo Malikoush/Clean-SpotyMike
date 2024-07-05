@@ -1,7 +1,7 @@
 <ion-content class="ion-padding">
   <div class="flex justify-between mt-2">
     <ion-buttons class="text-white py-7">
-      <ion-back-button defaultHref="/playlist"></ion-back-button>
+      <ion-back-button defaultHref="/search"></ion-back-button>
     </ion-buttons>
     <div class="text-white mt-8">Album</div>
     <ion-icon
@@ -31,7 +31,14 @@
       <div class="text-sm">- {{album.year}} - {{album.label}}</div>
     </div>
 
-     
+    @for (song of songs; track $index) {
+    <div class="mt-8 flex ml-2">
+      <div class="text-lg">{{$index +1}}</div>
+      <div class="ml-4 text-lg">{{song.title}}</div>
+    </div>
+    <div class="mt-4">
+      <hr />
+    </div>
+    }
   </div>
-   
 </ion-content>

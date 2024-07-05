@@ -150,6 +150,41 @@ export class FirestoreService {
    *
    */
 
+  getAllSongByOneAlbum(idDocument: string): Observable<ISong[]> {
+    const groupCollection = collectionGroup(this.db, 'song');
+    const songQuery = query(
+      groupCollection,
+      where('idAlbum', '==', idDocument)
+    );
+
+    const querySnapshot = from(getDocs(songQuery));
+    return querySnapshot.pipe(
+      map(
+        (snapshot) =>
+          snapshot.docs.map((doc) => ({
+            idDocument: doc.id,
+            ...doc.data(),
+          })) as ISong[]
+      )
+    );
+  }
+
+  getAllSongByCategory(category: string): Observable<ISong[]> {
+    const groupCollection = collectionGroup(this.db, 'song');
+    const songQuery = query(groupCollection, where('categ', '==', category));
+
+    const querySnapshot = from(getDocs(songQuery));
+    return querySnapshot.pipe(
+      map(
+        (snapshot) =>
+          snapshot.docs.map((doc) => ({
+            idDocument: doc.id,
+            ...doc.data(),
+          })) as ISong[]
+      )
+    );
+  }
+
   getSongsByIds(songIds: string[] | string): Observable<ISong[]> {
     const songCollection = collectionGroup(this.db, 'song');
     const querySnapshot = from(getDocs(songCollection));
@@ -270,77 +305,6 @@ export class FirestoreService {
    *    SEARCH
    *
    */
-
-  getSearchAlbum(filterText?: string): Observable<IAlbum[]> {
-    const groupCollection = collectionGroup(this.db, 'album');
-    const querySnapshot = from(getDocs(groupCollection));
-    return querySnapshot.pipe(
-      map(
-        (snapshot) =>
-          snapshot.docs.map((doc) => ({
-            idDocument: doc.id,
-            ...doc.data(),
-          })) as IAlbum[]
-      ),
-      map((albums) => {
-        // Filtre les albums par visibilité et par nom, year ou catégories si filterText est défini
-        return albums.filter(
-          (album) =>
-            album.visibility &&
-            (!filterText ||
-              album.nom.toLowerCase().includes(filterText.toLowerCase()) ||
-              album.year.includes(filterText) ||
-              album.categ.some((category) =>
-                category.toLowerCase().includes(filterText.toLowerCase())
-              ))
-        );
-      })
-    );
-  }
-  getSearchSong(filterText?: string): Observable<ISong[]> {
-    const groupCollection = collectionGroup(this.db, 'song');
-    const querySnapshot = from(getDocs(groupCollection));
-    return querySnapshot.pipe(
-      map(
-        (snapshot) =>
-          snapshot.docs.map((doc) => ({
-            idDocument: doc.id,
-            ...doc.data(),
-          })) as ISong[]
-      ),
-      map((songs) => {
-        // Filtre les songs par visibilité et par nom, year ou catégories si filterText est défini
-        return songs.filter(
-          (song) =>
-            song.visibility &&
-            (!filterText ||
-              song.title.toLowerCase().includes(filterText.toLowerCase()))
-        );
-      })
-    );
-  }
-  getSearchArtist(filterText?: string): Observable<IArtist[]> {
-    const groupCollection = collectionGroup(this.db, 'artist');
-    const querySnapshot = from(getDocs(groupCollection));
-    return querySnapshot.pipe(
-      map(
-        (snapshot) =>
-          snapshot.docs.map((doc) => ({
-            idDocument: doc.id,
-            ...doc.data(),
-          })) as IArtist[]
-      ),
-      map((artits) => {
-        // Filtre les artits par visibilité et par nom, year ou catégories si filterText est défini
-        return artits.filter(
-          (artist) =>
-            artist.active &&
-            (!filterText ||
-              artist.fullname.toLowerCase().includes(filterText.toLowerCase()))
-        );
-      })
-    );
-  }
 
   getSearchResults(
     filterText: string

@@ -70,6 +70,14 @@
           <ion-icon
             name="heart-outline"
             class="text-gray-900 text-2xl"
+            *ngIf="!isLike"
+            (click)="$event.stopPropagation(); likeSong(idDocument)"
+          ></ion-icon>
+          <ion-icon
+            name="heart-sharp"
+            *ngIf="isLike"
+            class="text-red-700"
+            (click)="$event.stopPropagation(); likeSong(idDocument)"
           ></ion-icon>
         </div>
         <div

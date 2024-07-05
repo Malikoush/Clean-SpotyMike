@@ -50,7 +50,6 @@ export class InfoalbumPage implements OnInit {
     this.idDocument = this.activetedRoute.snapshot.params['id'];
     this.fireStoreService.getOneAlbum(this.idDocument).subscribe((res) => {
       this.album = res;
-      console.log(this.album);
 
       this.fireStoreService
         .getOneArtist(this.album.idArtist)
@@ -58,5 +57,12 @@ export class InfoalbumPage implements OnInit {
           this.artist = res;
         });
     });
+
+    this.fireStoreService
+      .getAllSongByOneAlbum(this.idDocument)
+      .subscribe((res) => {
+        this.songs = res;
+        console.log(this.songs);
+      });
   }
 }

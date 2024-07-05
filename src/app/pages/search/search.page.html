@@ -36,7 +36,7 @@
   <div class="text-secondary mt-11">Parcourir les catégories</div>
   <div class="grid grid-cols-3 gap-4 mt-3 max-[320px]:ml-6 min-[321px]:ml-10">
     @for(categorie of categories; track categorie) {
-    <div class="flex-col">
+    <div class="flex-col" (click)="routeCategory(categorie.name)">
       <div>
         <img [src]=" categorie.image " alt="" width="50" height="50" />
       </div>
