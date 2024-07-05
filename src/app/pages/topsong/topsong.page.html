@@ -1,13 +1,24 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>topsong</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Top Song</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">topsong</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  @if(songs.length > 0){ @for(song of songs; track $index){
+
+  <app-card
+    styles="music"
+    [img]="song.cover"
+    [title]="song.title"
+    [idArtist]="song.idArtist"
+    [idDocument]="song.idDocument"
+    class="p-3"
+  ></app-card>
+  } }@else{
+  <div class="text-center text-gray-500 py-40">Aucune musique disponible</div>
+  }
 </ion-content>

@@ -58,6 +58,8 @@ export class RegisterPage implements OnInit {
       Validators.minLength(8),
     ]),
   });
+  passwordFieldType: string = 'password';
+
   constructor() {}
   onSubmit() {
     this.router.navigateByUrl('/home/tabs/tab1');
@@ -65,5 +67,10 @@ export class RegisterPage implements OnInit {
   ngOnInit() {}
   goToConnexion() {
     this.router.navigate(['/login']);
+  }
+
+  togglePasswordVisibility() {
+    this.passwordFieldType =
+      this.passwordFieldType === 'password' ? 'text' : 'password';
   }
 }

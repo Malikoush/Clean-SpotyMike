@@ -16,7 +16,14 @@ import {
   and,
   documentId,
 } from 'firebase/firestore/lite';
-import { Observable, combineLatest, from, map, mergeMap, switchMap } from 'rxjs';
+import {
+  Observable,
+  combineLatest,
+  from,
+  map,
+  mergeMap,
+  switchMap,
+} from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { IPlaylist, ISong, IUser } from '../interfaces/user';
 import { merge } from 'rxjs';
@@ -48,7 +55,6 @@ export class FirestoreService {
       )
     );
   }
-
 
   getUserAlbum(idDocument: string): Observable<IPlaylist[]> {
     const playlistsCol = collection(this.db, `users/${idDocument}/playlist`);
@@ -109,56 +115,60 @@ export class FirestoreService {
       )
     );
   }
-  
-getArtistAlbums(artistId: string): Observable<IAlbum[]> {
+
+  getArtistAlbums(artistId: string): Observable<IAlbum[]> {
     const albumCollection = collectionGroup(this.db, 'album');
     const querySnapshot = from(getDocs(albumCollection));
     return querySnapshot.pipe(
       map((snapshot) => {
         return snapshot.docs
           .filter((doc) => doc.data()['idArtist'] === artistId)
-          .map((doc) => ({
-            idDocument: doc.id,
-            ...doc.data(),
-          } as IAlbum));
+          .map(
+            (doc) =>
+              ({
+                idDocument: doc.id,
+                ...doc.data(),
+              } as IAlbum)
+          );
       })
     );
   }
 
-    
-getArtistSongs(artistId: string): Observable<ISong[]> {
-  const songCollection = collectionGroup(this.db, 'song');
-  const querySnapshot = from(getDocs(songCollection));
-  return querySnapshot.pipe(
-    map((snapshot) => {
-      return snapshot.docs
-        .filter((doc) => doc.data()['idArtist'] === artistId)
-        .map((doc) => ({
-          idDocument: doc.id,
-          ...doc.data(),
-        } as ISong));
-    })
-  );
-}
+  getArtistSongs(artistId: string): Observable<ISong[]> {
+    const songCollection = collectionGroup(this.db, 'song');
+    const querySnapshot = from(getDocs(songCollection));
+    return querySnapshot.pipe(
+      map((snapshot) => {
+        return snapshot.docs
+          .filter((doc) => doc.data()['idArtist'] === artistId)
+          .map(
+            (doc) =>
+              ({
+                idDocument: doc.id,
+                ...doc.data(),
+              } as ISong)
+          );
+      })
+    );
+  }
 
-
-getUsersByIds(ids : String[] | undefined): Observable<IUser[]> {
-  const userQuery = query(
-    collection(this.db, 'users'),
-    where(documentId(), 'in',ids),
-    
-    
-  );
-  return from(getDocs(userQuery)).pipe(
-    map(querySnapshot => 
-      querySnapshot.docs.map(doc => ({
-        idDocument: doc.id,
-        ...doc.data()
-      }  as IUser))
-    )
-  );
-}
-
+  getUsersByIds(ids: String[] | undefined): Observable<IUser[]> {
+    const userQuery = query(
+      collection(this.db, 'users'),
+      where(documentId(), 'in', ids)
+    );
+    return from(getDocs(userQuery)).pipe(
+      map((querySnapshot) =>
+        querySnapshot.docs.map(
+          (doc) =>
+            ({
+              idDocument: doc.id,
+              ...doc.data(),
+            } as IUser)
+        )
+      )
+    );
+  }
 
   /**
    *
@@ -317,6 +327,24 @@ getUsersByIds(ids : String[] | undefined): Observable<IUser[]> {
     );
   }
 
+  getAllTopSongs(): Observable<ISong[]> {
+    const groupCollection = collectionGroup(this.db, 'song');
+    const topSongsQuery = query(
+      groupCollection,
+      orderBy('like', 'desc'),
+      limit(3)
+    );
+    const querySnapshot = from(getDocs(topSongsQuery));
+    return querySnapshot.pipe(
+      map(
+        (snapshot) =>
+          snapshot.docs.map((doc) => ({
+            idDocument: doc.id,
+            ...doc.data(),
+          })) as ISong[]
+      )
+    );
+  }
   /**
    *
    *    ALBUMS

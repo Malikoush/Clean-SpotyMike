@@ -42,16 +42,14 @@
     <div class="categorie">
       <div class="header-cat">
         <div class="font-bold">Music Genres</div>
-        <div class="text-primary" (click)="redirectTo('/categorie')">
-          See All
-        </div>
+        <div class="text-primary" (click)="redirectTo('/search')">See All</div>
       </div>
       <div class="choose-genre">
         <ion-button
           shape="round"
           [class.fill]="selectedCategory === 'All'"
           [fill]="selectedCategory === 'All' ? 'solid' : 'outline'"
-          (click)="selectCategory('All')"
+          (click)="redirectTo('/search')"
           >All</ion-button
         >
 
@@ -108,7 +106,6 @@
       </div>
       @for (lastplayed of topSongs; track lastplayed) {
       <app-tiny-card
-    
         [image]="lastplayed.cover"
         [title]="lastplayed.title"
         [subtitle]="'unknown'"
