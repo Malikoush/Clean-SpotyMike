@@ -3,6 +3,8 @@ import { Observable, catchError, map, of, tap } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
 import { IUser } from '../interfaces/user';
+import { FirestoreService } from './firestore.service';
+import { LocalstorageService } from './localstorage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +12,8 @@ import { IUser } from '../interfaces/user';
 export class AuthentificationService {
   private http = inject(HttpClient);
   private apiUrl = environment.apiUrl;
+  private fireStore = inject(FirestoreService);
+  private localStorage = inject(LocalstorageService);
 
   getUsers(): Observable<IUser[]> {
     return this.http
@@ -31,7 +35,7 @@ export class AuthentificationService {
   // private route = environment.url_api;
   // constructor() { }
   login(email: string, password: string): Observable<any> {
-    return this.http.post('http://localhost:3000/auth/user/signin', {
+    return this.http.post<any>(this.apiUrl + 'auth/user/signin', {
       email: email,
       password: password,
     });

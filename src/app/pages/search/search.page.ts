@@ -19,6 +19,8 @@ import { optionsOutline } from 'ionicons/icons';
 import { FirestoreService } from 'src/app/core/services/firestore.service';
 import { IAlbum, IArtist, ISong } from 'src/app/core/interfaces/user';
 import { CardComponent } from 'src/app/shared/card/card.component';
+import { Router } from '@angular/router';
+import { LocalstorageService } from 'src/app/core/services/localstorage.service';
 
 @Component({
   selector: 'app-search',
@@ -86,6 +88,8 @@ export class SearchPage implements OnInit {
   searchInput: string = '';
   showResults = false;
   private firebase = inject(FirestoreService);
+  private route = inject(Router);
+  private localStorageService = inject(LocalstorageService);
 
   constructor() {
     addIcons({
@@ -101,7 +105,9 @@ export class SearchPage implements OnInit {
     artists: [],
   };
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.localStorageService.removeElement('playlist');
+  }
 
   onFilterChange(filterName: string, event: any) {
     if (event.detail.checked) {
@@ -126,5 +132,9 @@ export class SearchPage implements OnInit {
         });
       }
     });
+  }
+
+  routeCategory(name: string) {
+    this.route.navigate(['/categorie', name]);
   }
 }

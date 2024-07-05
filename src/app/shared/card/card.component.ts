@@ -19,12 +19,15 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 import { addIcons } from 'ionicons';
 import {
   ellipsisVerticalOutline,
+  headsetSharp,
   heartOutline,
+  heartSharp,
   shareSocialOutline,
 } from 'ionicons/icons';
 import { Router, RouterLink } from '@angular/router';
 import { IArtist, IPlaylist, ISong } from 'src/app/core/interfaces/user';
 import { FirestoreService } from 'src/app/core/services/firestore.service';
+import { LocalstorageService } from 'src/app/core/services/localstorage.service';
 
 @Component({
   selector: 'app-card',
@@ -66,11 +69,19 @@ export class CardComponent implements OnInit {
   isSelected = false;
   isHidden = false;
   infosArtist: IArtist = {} as IArtist;
+  listSongs: any[] = [];
+  isLike = false;
 
   private router = inject(Router);
   private firestoreService = inject(FirestoreService);
+  private localStorageService = inject(LocalstorageService);
   constructor() {
-    addIcons({ heartOutline, shareSocialOutline, ellipsisVerticalOutline });
+    addIcons({
+      heartOutline,
+      shareSocialOutline,
+      ellipsisVerticalOutline,
+      heartSharp,
+    });
   }
 
   ngOnInit() {
@@ -87,6 +98,10 @@ export class CardComponent implements OnInit {
     } else {
       this.name = 'playlist';
     }
+
+    this.listSongs = JSON.parse(
+      this.localStorageService.getElement('like') as string
+    );
   }
 
   onSelect(url?: string) {
@@ -108,5 +123,30 @@ export class CardComponent implements OnInit {
     }
 
     // 2 secondes pour l'animation de disparition
+  }
+
+  likeSong(idDocument: string | undefined) {
+    if (this.localStorageService.getElement('like') === null) {
+      this.listSongs.push(idDocument as string);
+      this.localStorageService.setElement('like', this.listSongs.toString());
+
+      this.isLike = true;
+    } else {
+      this.listSongs = JSON.parse(this.localStorageService.getElement('like'));
+
+      if (this.listSongs.includes(idDocument as string)) {
+        const index = this.listSongs.indexOf(idDocument as string);
+        if (index > -1) {
+          this.listSongs.splice(index, 1);
+          this.isLike = false;
+        }
+        this.localStorageService.setElement('like', this.listSongs.toString());
+      } else {
+        this.listSongs.push(idDocument as string);
+        this.localStorageService.setElement('like', this.listSongs.toString());
+
+        this.isLike = true;
+      }
+    }
   }
 }

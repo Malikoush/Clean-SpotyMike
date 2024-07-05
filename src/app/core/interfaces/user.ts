@@ -59,6 +59,7 @@ export interface ISong {
   visibility: boolean;
   idArtist: string;
   idAlbum: string;
+  categ: string;
 }
 
 export interface IPlaylist {

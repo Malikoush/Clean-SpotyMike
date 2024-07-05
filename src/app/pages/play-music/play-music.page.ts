@@ -1,5 +1,5 @@
 import { IonButtons, IonBackButton, IonIcon } from '@ionic/angular/standalone';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -81,36 +81,45 @@ export class PlayMusicPage implements OnInit {
 
   ngOnInit() {
     this.id = this.activetedRoute.snapshot.params['name'];
-    this.localStorageSongs = this.localStorageService.getElement('playlist');
+    this.localStorageSongs =
+      this.localStorageService.getElement('playlist') || [];
     console.log(this.localStorageSongs);
-    this.localStorageSongs.find((element, index) => {
-      if (element === this.id) {
-        this.currentIndex = index;
-      }
-    });
+
     this.firebase.getOneSong(this.id).subscribe((data) => {
       this.song = data;
       this.firebase.getOneArtist(this.song.idArtist).subscribe((data) => {
         this.nameArtist = data.fullname;
       });
     });
+    this.localStorageSongs.map((element) => {
+      console.log(element);
+    });
   }
 
   playNext() {
-    if (this.currentIndex < this.localStorageSongs.length - 1) {
-      this.currentIndex++;
-      const nextIddocument = this.localStorageSongs[this.currentIndex];
-      this.firebase.getOneSong(nextIddocument).subscribe((data) => {
-        this.song = data;
-        this.firebase.getOneArtist(this.song.idArtist).subscribe((data) => {
-          this.nameArtist = data.fullname;
+    if (this.localStorageSongs.length > 0) {
+      if (this.currentIndex < this.localStorageSongs.length - 1) {
+        this.currentIndex++;
+        const nextIddocument = this.localStorageSongs[this.currentIndex];
+        this.firebase.getOneSong(nextIddocument).subscribe((data) => {
+          this.song = data;
+          this.firebase.getOneArtist(this.song.idArtist).subscribe((data) => {
+            this.nameArtist = data.fullname;
+          });
         });
-      });
-    } else {
-      this.currentIndex = 0;
-      const nextIddocument = this.localStorageSongs[this.currentIndex];
+      } else {
+        this.currentIndex = 0;
+        const nextIddocument = this.localStorageSongs[this.currentIndex];
 
-      this.firebase.getOneSong(nextIddocument).subscribe((data) => {
+        this.firebase.getOneSong(nextIddocument).subscribe((data) => {
+          this.song = data;
+          this.firebase.getOneArtist(this.song.idArtist).subscribe((data) => {
+            this.nameArtist = data.fullname;
+          });
+        });
+      }
+    } else {
+      this.firebase.getOneSong(this.id).subscribe((data) => {
         this.song = data;
         this.firebase.getOneArtist(this.song.idArtist).subscribe((data) => {
           this.nameArtist = data.fullname;

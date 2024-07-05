@@ -90,6 +90,8 @@ export class HomePage implements OnInit {
 
   selectCategory(category: string) {
     this.selectedCategory = category;
+
+    this.router.navigate(['/categorie', category]);
   }
 
   redirectTo(route?: string) {
