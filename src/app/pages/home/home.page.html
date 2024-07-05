@@ -35,7 +35,7 @@
       </div>
       <img
         class="img-album ml-2"
-        (click)="redirectTo('/infoalbum')"
+        (click)="redirectTo('/play-music/' + 'oo1JYDAgz8Wm2YyHcGh6')"
         src="https://picsum.photos/200"
       />
     </div>
@@ -144,7 +144,7 @@
         <app-carousel
           [title]="topAlbum.nom"
           [img]="topAlbum.cover"
-          [url]="'/infoalbum/' + topAlbum.idDocument"
+          [url]="'/album/' + topAlbum.idDocument"
         >
         </app-carousel>
         }
