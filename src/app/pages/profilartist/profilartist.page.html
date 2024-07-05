@@ -1,28 +1,19 @@
 <ion-content scroll-y="false">
   <div class="container">
-    
-
     <div class="header-profil">
-
       <ion-avatar>
         <img alt="Silhouette of a person's head" src="{{artist.avatar}}" />
       </ion-avatar>
       <div>
-      <ion-text color="primary">
-        <h1>{{ artist.fullname}}</h1>
-      </ion-text>
-      <br>
-      <ion-text color="primary">
-        <p>{{artist.description}}</p>
-      </ion-text>
-      <br>
-      <ion-button (click)="onPasswordLostModal()">Modify</ion-button>
-      
-
-    </div>
-
-    
-
+        <ion-text class="text-primary">
+          <h1>{{ artist.fullname}}</h1>
+        </ion-text>
+        <br />
+        <ion-text color="primary">
+          <p>{{artist.description}}</p>
+        </ion-text>
+        <br />
+      </div>
     </div>
     <div class="menu-artist">
       <div [class.clicked]="selectedIndex === 0" (click)="onItemClick(0)">
@@ -42,97 +33,65 @@
         <ion-text>Following</ion-text>
       </div>
     </div>
-    @if(componentToShow === 'album'){
-      @if(albums.length === 1){
-       
-      @for (album of albums; track $index){
-        <div class="component">
-        <app-card
-          styles="album"
-          [img]="album.cover"
-          [title]="album.nom"
-          [nbre]="songs.length"
-          [idDocument]="album.idDocument"
-          class="p-3"
-        ></app-card>
-      </div>
-       
-        }
-   
-      }
-      @else{
-        <ion-label>Vous n'avez aucun album</ion-label>
-      }
-    }
-    @if(componentToShow === 'song'){
-      @if(songs.length === 3){
-       
-      @for (song of songs; track $index){
-        <div class="component">
-          <app-card
-          styles="music"
-          [img]="song.cover"
-          [title]="song.title"
-          [idArtist]="song.idArtist"
-          [idDocument]="song.idDocument"
-          class="p-3"
-        ></app-card>
-        
-      </div>
-       
-        }
-   
-      }
-    @else{
-      <div class="text-center text-gray-500 py-40">Aucune musique disponible</div>
-    
-      }
-    }
-    @if(componentToShow === 'follower'){
-      @if(true){
-       
-      @for (follower of followers; track $index){
-        <div class="component">
-          <app-tiny-card
-          styles="user"
+    @if(componentToShow === 'album'){ @if(albums.length === 1){ @for (album of
+    albums; track $index){
+    <div class="component">
+      <app-card
+        styles="album"
+        [img]="album.cover"
+        [title]="album.nom"
+        [nbre]="songs.length"
+        [idDocument]="album.idDocument"
+        class="p-3"
+      ></app-card>
+    </div>
+
+    } } @else{
+    <ion-label>Vous n'avez aucun album</ion-label>
+    } } @if(componentToShow === 'song'){ @if(songs.length === 3){ @for (song of
+    songs; track $index){
+    <div class="component">
+      <app-card
+        styles="music"
+        [img]="song.cover"
+        [title]="song.title"
+        [idArtist]="song.idArtist"
+        [idDocument]="song.idDocument"
+        class="p-3"
+      ></app-card>
+    </div>
+
+    } } @else{
+    <div class="text-center text-gray-500 py-40">Aucune musique disponible</div>
+
+    } } @if(componentToShow === 'follower'){ @if(true){ @for (follower of
+    followers; track $index){
+    <div class="component">
+      <app-tiny-card
+        styles="user"
         [image]="'https://static.vecteezy.com/ti/vecteur-libre/t2/2387693-icone-de-profil-utilisateur-vectoriel.jpg'"
         [title]="follower.firstname"
         [subtitle]="follower.lastname"
         [duration]="''"
-        
       ></app-tiny-card>
-      </div>
-       
-        }
-   
-      }
-      @else{
-        <ion-label>Vous n'avez aucun album</ion-label>
-      }
-    }
-    @if(componentToShow === 'following'){
-      @if(true){
-       
-      @for (following of followings; track $index){
-        <div class="component">
-          <app-tiny-card
-          styles="user"
-          [image]="'https://static.vecteezy.com/ti/vecteur-libre/t2/2387693-icone-de-profil-utilisateur-vectoriel.jpg'"
-          [title]="following.firstname"
-          [subtitle]="following.lastname"
-          [duration]="''"
-          
-        ></app-tiny-card>
-      </div>
-       
-        }
-   
-      }
-      @else{
-        <ion-label>Vous n'avez aucun album</ion-label>
-      }
-    }
+    </div>
 
+    } } @else{
+    <ion-label>Vous n'avez aucun album</ion-label>
+    } } @if(componentToShow === 'following'){ @if(true){ @for (following of
+    followings; track $index){
+    <div class="component">
+      <app-tiny-card
+        styles="user"
+        [image]="'https://static.vecteezy.com/ti/vecteur-libre/t2/2387693-icone-de-profil-utilisateur-vectoriel.jpg'"
+        [title]="following.firstname"
+        [subtitle]="following.lastname"
+        [duration]="''"
+      ></app-tiny-card>
+    </div>
+
+    } } @else{
+    <ion-label>Vous n'avez aucun album</ion-label>
+    } }
   </div>
- 
 </ion-content>

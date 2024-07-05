@@ -23,6 +23,7 @@ import {
   IonGrid,
   IonCol,
   IonRow,
+  IonToast,
 } from '@ionic/angular/standalone';
 //import { AuthentificationService } from 'src/app/core/services/authentification.service';
 //import { TranslateModule } from '@ngx-translate/core';
@@ -43,6 +44,7 @@ import { FirestoreService } from 'src/app/core/services/firestore.service';
   styleUrls: ['./login.page.scss'],
   standalone: true,
   imports: [
+    IonToast,
     IonRow,
     IonCol,
     IonGrid,
@@ -74,11 +76,12 @@ export class LoginPage implements OnInit {
   private firebase = inject(FirestoreService);
   private authService = inject(AuthentificationService);
   passwordFieldType: string = 'password';
-
+  messageError: string = '';
+  isToastOpen = false;
   form: FormGroup = new FormGroup({
     email: new FormControl('', [
       Validators.required,
-      Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$'),
+      Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
     ]),
     password: new FormControl('', [
       Validators.required,
@@ -101,7 +104,10 @@ export class LoginPage implements OnInit {
       this.authService
         .login(this.form.value.email, this.form.value.password)
         .subscribe((res) => {
-          if (res) {
+          if (res.error) {
+            this.messageError = res.message;
+            this.isToastOpen = true;
+          } else {
             this.localStorageService.setElement(
               'token',
               JSON.stringify(res.accessToken)
@@ -123,25 +129,11 @@ export class LoginPage implements OnInit {
             this.router.navigateByUrl('/home');
           }
         });
-
-      // this.router.navigateByUrl('/home');
-      // this.firebase
-      //   .login(this.form.value.email, this.form.value.password)
-      //   .subscribe((user) => {
-      //     if (user.idDocument) {
-      //       this.localStorageService.setElement(
-      //         'userIdDocument',
-      //         JSON.stringify(user.idDocument)
-      //       ); // JSON.stringify( user);
-      //       this.router.navigateByUrl('/home');
-      //     } else {
-      //       this.error = 'Email ou mot de passe incorrect';
-      //       console.log(this.error);
-      //     }
-      //   });
     }
   }
-
+  setOpen(isOpen: boolean) {
+    this.isToastOpen = isOpen;
+  }
   goToRegister() {
     this.router.navigateByUrl('/register');
   }

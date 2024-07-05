@@ -97,19 +97,18 @@
             </div>
             <hr />
             <div class="mt-6 ml-20">
-              <ion-toggle (ionChange)="onFilterChange('song', $event)"
+              <ion-toggle
+                color="success"
+                (ionChange)="onFilterChange('song', $event)"
                 >Song</ion-toggle
               >
             </div>
             <hr />
             <div class="mt-6 ml-20">
-              <ion-toggle (ionChange)="onFilterChange('album', $event)"
+              <ion-toggle
+                color="success"
+                (ionChange)="onFilterChange('album', $event)"
                 >Albums</ion-toggle
-              >
-            </div>
-            <div *ngIf="selectedFilter" class="mt-6 ml-20">
-              <ion-label class="text-primary font-bold"
-                >Selected Filter: {{ selectedFilter }}</ion-label
               >
             </div>
           </div>

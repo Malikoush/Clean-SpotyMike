@@ -26,11 +26,6 @@
                     type="text"
                     placeholder="Doe"
                   />
-                  <div *ngIf="form.get('email')?.errors ">
-                    <div *ngIf="form.get('email')?.errors?.['pattern']">
-                      <p class="error">Email format is invalid</p>
-                    </div>
-                  </div>
                 </div>
                 <div class="mb-4">
                   <label
@@ -46,11 +41,6 @@
                     type="text"
                     placeholder="Jean"
                   />
-                  <div *ngIf="form.get('email')?.errors ">
-                    <div *ngIf="form.get('email')?.errors?.['pattern']">
-                      <p class="error">Email format is invalid</p>
-                    </div>
-                  </div>
                 </div>
                 <div class="mb-4">
                   <label
@@ -66,11 +56,6 @@
                     type="text"
                     placeholder="JJ/MM/AAAA"
                   />
-                  <div *ngIf="form.get('email')?.errors ">
-                    <div *ngIf="form.get('email')?.errors?.['pattern']">
-                      <p class="error">Email format is invalid</p>
-                    </div>
-                  </div>
                 </div>
                 <div class="mb-4">
                   <label
@@ -86,11 +71,6 @@
                     type="text"
                     placeholder="JJ/MM/AAAA"
                   />
-                  <div *ngIf="form.get('email')?.errors ">
-                    <div *ngIf="form.get('email')?.errors?.['pattern']">
-                      <p class="error">Email format is invalid</p>
-                    </div>
-                  </div>
                 </div>
                 <div class="mb-4">
                   <label
@@ -106,11 +86,6 @@
                     type="email"
                     placeholder="mike@mike.mike"
                   />
-                  <div *ngIf="form.get('email')?.errors ">
-                    <div *ngIf="form.get('email')?.errors?.['pattern']">
-                      <p class="error">Email format is invalid</p>
-                    </div>
-                  </div>
                 </div>
 
                 <div class="mb-6">
@@ -139,24 +114,6 @@
                         class="text-gray-500"
                       ></ion-icon>
                     </button>
-                  </div>
-
-                  <div
-                    *ngIf="form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)"
-                  >
-                    <div *ngIf="form.get('password')?.errors?.['minlength']">
-                      <p class="error">
-                        Password must be at least 8 characters long
-                      </p>
-                    </div>
-                    <div
-                      *ngIf="((form.get('password')?.errors?.['pattern'])&&!form.get('password')?.errors?.['minlength'])"
-                    >
-                      <p class="error">
-                        Password must contain at least one uppercase letter, one
-                        lowercase letter, one number, and one special character
-                      </p>
-                    </div>
                   </div>
                 </div>
               </ion-list>

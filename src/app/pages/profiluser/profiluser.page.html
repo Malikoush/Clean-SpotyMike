@@ -1,40 +1,78 @@
 <ion-content scroll-y="false">
   <div class="container">
-    
-
     <div class="header-profil">
-
       <ion-avatar>
-        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+        <img
+          alt="Silhouette of a person's head"
+          src="https://ionicframework.com/docs/img/demos/avatar.svg"
+        />
       </ion-avatar>
       <div>
-      <ion-text color="primary">
-        <h1>{{user.firstname}} {{user.lastname}}</h1>
-      </ion-text>
-      <ion-button (click)="onPasswordLostModal()">Become an artist</ion-button>
+        <ion-text class="text-primary">
+          <h1>{{user.firstname}} {{user.lastname}}</h1>
+        </ion-text>
+        <!-- <ion-button (click)="onPasswordLostModal()"
+          >Become an artist</ion-button
+        > -->
+      </div>
     </div>
+    <div class="form" [formGroup]="profilForm">
+      <div class="mb-4">
+        <label
+          class="block text-gray-400 text-sm font-bold mb-2"
+          for="username"
+        >
+          Nom <span class="text-red-500">*</span>
+        </label>
+        <input
+          class="border-gray-400 focus:ring-green-700 focus:border-primary w-full py-2 px-3 h-14 text-gray-700 mb-3 leading-tight"
+          type="text"
+          name="name"
+          formControlName="name"
+        />
+      </div>
+      <div class="mb-4">
+        <label
+          class="block text-gray-400 text-sm font-bold mb-2"
+          for="username"
+        >
+          Prenom <span class="text-red-500">*</span>
+        </label>
+        <input
+          class="border-gray-400 focus:ring-green-700 focus:border-primary w-full py-2 px-3 h-14 text-gray-700 mb-3 leading-tight"
+          type="text"
+          name="prenom"
+          formControlName="prenom"
+        />
+      </div>
+      <div class="mb-4">
+        <label
+          class="block text-gray-400 text-sm font-bold mb-2"
+          for="username"
+        >
+          Email <span class="text-red-500">*</span>
+        </label>
+        <input
+          class="border-gray-400 focus:ring-green-700 focus:border-primary w-full py-2 px-3 h-14 text-gray-700 mb-3 leading-tight"
+          type="email"
+          name="email"
+          formControlName="email"
+        />
+      </div>
+      <div class="mb-4">
+        <label
+          class="block text-gray-400 text-sm font-bold mb-2"
+          for="username"
+        >
+          Phone <span class="text-red-500">*</span>
+        </label>
+        <input
+          class="border-gray-400 focus:ring-green-700 focus:border-primary w-full py-2 px-3 h-14 text-gray-700 mb-3 leading-tight"
+          type="text"
+          name="phone"
+          formControlName="phone"
+        />
+      </div>
     </div>
-    <div class="form">
-    <app-form-input
-    [title]="'Email'"
-    ></app-form-input>
-    <app-form-input
-    [title]="'Email'"
-    ></app-form-input>
-    <app-form-input
-    [title]="'Email'"
-    ></app-form-input>
-    <app-form-input
-    [title]="'Email'"
-    ></app-form-input>
-    <app-form-input
-    [title]="'Email'"
-    ></app-form-input>
-    <app-form-input
-    [title]="'Email'"
-    ></app-form-input>
-
   </div>
-  </div>
-    
 </ion-content>

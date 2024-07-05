@@ -1,13 +1,23 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>topalbum</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Top Album</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">topalbum</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  @if(albums.length > 0){ @for(album of albums; track $index){
+
+  <app-card
+    styles="album"
+    [img]="album.cover"
+    [title]="album.nom"
+    [idDocument]="album.idDocument"
+    class="p-3"
+  ></app-card>
+  } }@else{
+  <div class="text-center text-gray-500 py-40">Aucune musique disponible</div>
+  }
 </ion-content>

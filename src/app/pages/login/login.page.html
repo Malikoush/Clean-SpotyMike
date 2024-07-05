@@ -28,7 +28,7 @@
                   />
                   <div *ngIf="form.get('email')?.errors ">
                     <div *ngIf="form.get('email')?.errors?.['pattern']">
-                      <p class="error">Email format is invalid</p>
+                      <p class="error">Email invalide</p>
                     </div>
                   </div>
                 </div>
@@ -66,15 +66,15 @@
                   >
                     <div *ngIf="form.get('password')?.errors?.['minlength']">
                       <p class="error">
-                        Password must be at least 8 characters long
+                        mot de passe doit contenir au moin 8 caractères
                       </p>
                     </div>
                     <div
                       *ngIf="((form.get('password')?.errors?.['pattern'])&&!form.get('password')?.errors?.['minlength'])"
                     >
                       <p class="error">
-                        Password must contain at least one uppercase letter, one
-                        lowercase letter, one number, and one special character
+                        le mot de passe doit contenir au moins un chiffre , un
+                        caractère majuscule et un caractère speciaux.
                       </p>
                     </div>
                   </div>
@@ -101,4 +101,11 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-toast
+    [isOpen]="isToastOpen"
+    [message]="messageError"
+    color="danger"
+    [duration]="5000"
+    (didDismiss)="setOpen(false)"
+  ></ion-toast>
 </ion-content>
