@@ -24,7 +24,6 @@ import {
   IonAvatar,
   IonItem,
 } from '@ionic/angular/standalone';
-import { ExploreContainerComponent } from 'src/app/explore-container/explore-container.component';
 import { Song } from 'src/app/core/interfaces/song';
 import { arrowForwardOutline, searchOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
@@ -54,7 +53,6 @@ import { Router, RouterLink } from '@angular/router';
     IonToolbar,
     CommonModule,
     FormsModule,
-    ExploreContainerComponent,
     CarouselComponent,
     TinyCardComponent,
     IonAvatar,
