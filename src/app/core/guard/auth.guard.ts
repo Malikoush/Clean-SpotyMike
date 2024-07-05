@@ -10,11 +10,9 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   // Récupérer le token depuis le local storage
   const token = localStore.getElement('token');
-  console.log(token);
 
   // Si aucun token n'est trouvé, rediriger ou refuser l'accès
   if (token === null || token === undefined || !token) {
-    console.log(1);
 
     router.navigate(['/login']);
     return false;
@@ -22,7 +20,6 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   // Déchiffrer le token pour obtenir son payload
   const decodedToken: any = jwtDecode(token);
-  console.log(2);
   // Vérifier si le token contient une date d'expiration
   if (!decodedToken || !decodedToken.exp) {
     router.navigate(['/login']);

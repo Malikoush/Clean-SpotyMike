@@ -16,25 +16,6 @@ export class AuthentificationService {
   private fireStore = inject(FirestoreService);
   private localStorage = inject(LocalstorageService);
 
-  getUsers(): Observable<IUser[]> {
-    return this.http
-      .get<IUser[]>(`${this.apiUrl}/user`)
-      .pipe(map((res) => res));
-  }
-
-  // login(email: string, password: string): Observable<any> {
-  //   return this.http
-  //     .post<any>(`${this.apiUrl}/login`, {
-  //       email: email, // Modifier "username" en "email"
-  //       password: password,
-  //     })
-  //     .pipe(map((res) => res));
-
-  //   // .pipe(catchError(this.errorRequest));
-  // }
-
-  // private route = environment.url_api;
-  // constructor() { }
   login(email: string, password: string): Observable<any> {
     return this.http
       .post<any>(this.apiUrl + 'auth/user/signin', {

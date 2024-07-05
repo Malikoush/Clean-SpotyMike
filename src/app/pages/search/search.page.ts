@@ -96,7 +96,7 @@ export class SearchPage implements OnInit {
       optionsOutline,
     });
   }
-    selectedFilter: string = '';
+  selectedFilter: string = '';
 
   artist: IArtist = {} as IArtist;
   searchResults: { albums: IAlbum[]; songs: ISong[]; artists: IArtist[] } = {
@@ -122,7 +122,6 @@ export class SearchPage implements OnInit {
     this.showResults = true;
     this.firebase.getSearchResults(this.searchInput).subscribe((data) => {
       this.searchResults = data;
-      console.log(this.searchResults);
 
       if (this.searchResults.songs.length > 0) {
         this.searchResults.songs.forEach((song) => {
