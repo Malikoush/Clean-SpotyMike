@@ -99,6 +99,7 @@ export class LoginPage implements OnInit {
   onSubmit() {
     this.error = '';
     this.submitForm = true;
+    console.log(this.form.value);
 
     if (this.form.valid) {
       this.authService
